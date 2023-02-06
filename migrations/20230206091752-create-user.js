@@ -18,6 +18,9 @@ module.exports = {
       fullName: {
         type: Sequelize.STRING
       },
+      role: {
+        type: Sequelize.STRING
+      },
       deletedAt: {
         allowNull: true,
         defaultValue: null,

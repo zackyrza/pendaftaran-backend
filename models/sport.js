@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Sport.init({
     name: DataTypes.STRING,
+    noteUrl: DataTypes.STRING,
     deletedAt: DataTypes.DATE,
   }, {
     sequelize,

@@ -11,22 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Candidate.belongsTo(models.City, {
-        foreignKey: 'cityId',
-        as: 'city',
-        onDelete: 'CASCADE',
-      });
-      Candidate.belongsTo(models.Class, {
-        foreignKey: 'classId',
-        as: 'class',
+      Candidate.belongsTo(models.Registration, {
+        foreignKey: 'registrationId',
+        as: 'registration',
         onDelete: 'CASCADE',
       });
     }
   }
   Candidate.init({
     name: DataTypes.STRING,
-    cityId: DataTypes.INTEGER,
-    classId: DataTypes.INTEGER,
+    registrationId: DataTypes.INTEGER,
     status: DataTypes.STRING,
     nik: DataTypes.STRING,
     gender: DataTypes.STRING,
