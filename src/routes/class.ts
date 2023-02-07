@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import {getAll, getOne, update, create, remove} from "../controllers/sport";
+import {getAll, getOne, update, create, remove} from "../controllers/class";
 import { auth } from "../middleware/auth";
 const router = express.Router();
 
@@ -22,5 +22,5 @@ router.put("/:id", auth, (req: Request, res: Response) => {
 router.delete("/:id", auth, (req: Request, res: Response) => {
     remove(req, res);
 });
-
+    
 export default router;

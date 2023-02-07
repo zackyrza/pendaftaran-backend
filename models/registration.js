@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       Registration.belongsTo(models.Sport, { foreignKey: 'sportId' });
       Registration.belongsTo(models.Class, { foreignKey: 'classId' });
       Registration.belongsTo(models.SportGender, { foreignKey: 'sportGenderId' });
+      Registration.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
   Registration.init({
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     cityId: DataTypes.INTEGER,
     sportId: DataTypes.INTEGER,
     classId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     sportGenderId: DataTypes.INTEGER,
     deletedAt: DataTypes.DATE
   }, {
