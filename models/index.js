@@ -1,18 +1,21 @@
 'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require(process.env.PWD + '/config/config.json')[env];
 const db = {};
 
+
+// @ts-ignore
 let sequelize;
 if (config.use_env_variable) {
+  // @ts-ignore
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
+  // @ts-ignore
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
@@ -27,12 +30,16 @@ fs
     );
   })
   .forEach(file => {
+    // @ts-ignore
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    // @ts-ignore
     db[model.name] = model;
   });
 
 Object.keys(db).forEach(modelName => {
+  // @ts-ignore
   if (db[modelName].associate) {
+    // @ts-ignore
     db[modelName].associate(db);
   }
 });

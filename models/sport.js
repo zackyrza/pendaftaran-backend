@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use strict';
 const {
   Model
@@ -15,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Sport.init({
     name: DataTypes.STRING,
+    imageUrl: DataTypes.STRING,
     noteUrl: DataTypes.STRING,
     deletedAt: DataTypes.DATE,
   }, {
