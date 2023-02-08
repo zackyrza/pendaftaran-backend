@@ -11,6 +11,7 @@ import sportGenders from './src/routes/sportGender';
 import registrations from './src/routes/registration';
 import candidates from './src/routes/candidate';
 import mails from './src/routes/mail';
+import uploads from './src/routes/upload';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
 });
 
+app.use(express.static('./')); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -34,6 +36,7 @@ app.use('/api/sportGenders', sportGenders);
 app.use('/api/registrations', registrations);
 app.use('/api/candidates', candidates);
 app.use('/api/mails', mails);
+app.use('/api/uploads', uploads);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
