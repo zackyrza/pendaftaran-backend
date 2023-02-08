@@ -5,7 +5,10 @@ export const getAll = (req: Request, res: Response) => {
     db.City.findAll({
         where: {
             deletedAt: null,
-        }
+        },
+        order: [
+            ['id', 'ASC'],
+        ],
     }).then((cities: any[]) => {
         res.send({
             data: cities,

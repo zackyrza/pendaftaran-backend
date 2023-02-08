@@ -5,7 +5,10 @@ export const getAll = (req: Request, res: Response) => {
     db.Registration.findAll({
         where: {
             deletedAt: null,
-        }
+        },
+        order: [
+            ['id', 'ASC'],
+        ],
     }).then((registrations: any[]) => {
         res.send({
             data: registrations,

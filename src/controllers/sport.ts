@@ -5,7 +5,10 @@ export const getAll = (req: Request, res: Response) => {
     db.Sport.findAll({
         where: {
             deletedAt: null,
-        }
+        },
+        order: [
+            ['id', 'ASC'],
+        ],
     }).then((sports: any[]) => {
         res.send({
             data: sports,

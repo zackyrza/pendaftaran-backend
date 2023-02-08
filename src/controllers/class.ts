@@ -5,7 +5,10 @@ export const getAll = (req: Request, res: Response) => {
     db.Class.findAll({
         where: {
             deletedAt: null,
-        }
+        },
+        order: [
+            ['id', 'ASC'],
+        ],
     }).then((classes: any[]) => {
         res.send({
             data: classes,

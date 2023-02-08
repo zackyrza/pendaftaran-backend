@@ -7,7 +7,10 @@ export const getAll = (req: Request, res: Response) => {
     db.User.findAll({
         where: {
             deletedAt: null,
-        }
+        },
+        order: [
+            ['id', 'ASC'],
+        ],
     }).then((users: any[]) => {
         res.send({
             data: users,

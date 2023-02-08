@@ -5,7 +5,10 @@ export const getAll = (req: Request, res: Response) => {
     db.Candidate.findAll({
         where: {
             deletedAt: null,
-        }
+        },
+        order: [
+            ['id', 'ASC'],
+        ],
     }).then((candidates: any[]) => {
         res.send({
             data: candidates,
