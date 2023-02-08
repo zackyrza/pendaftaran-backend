@@ -19,7 +19,12 @@ export const getAll = (req: Request, res: Response) => {
 }
 
 export const getOne = (req: Request, res: Response) => {
-    db.Registration.findByPk(req.params.id).then((registration: any) => {
+    db.Registration.findOne({
+        include: { all: true, nested: true },
+        where: {
+            id: req.params.id
+        }
+    }).then((registration: any) => {
         res.send({
             data: registration,
             message: "Registration retrieved successfully",

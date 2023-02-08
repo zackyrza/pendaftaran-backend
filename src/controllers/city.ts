@@ -19,7 +19,12 @@ export const getAll = (req: Request, res: Response) => {
 }
 
 export const getOne = (req: Request, res: Response) => {
-    db.City.findByPk(req.params.id).then((city: any) => {
+    db.City.findOne({
+        include: { all: true, nested: true },
+        where: {
+            id: req.params.id
+        }
+    }).then((city: any) => {
         res.send({
             data: city,
             message: "City retrieved successfully",

@@ -21,7 +21,12 @@ export const getAll = (req: Request, res: Response) => {
 }
 
 export const getOne = (req: Request, res: Response) => {
-    db.User.findByPk(req.params.id).then((user: any) => {
+    db.User.findOne({
+        include: { all: true, nested: true },
+        where: {
+            id: req.params.id
+        }
+    }).then((user: any) => {
         res.send({
             data: user,
             message: "User retrieved successfully",

@@ -19,7 +19,12 @@ export const getAll = (req: Request, res: Response) => {
 }
 
 export const getOne = (req: Request, res: Response) => {
-    db.Class.findByPk(req.params.id).then((updated: any) => {
+    db.Class.findOne({
+        include: { all: true, nested: true },
+        where: {
+            id: req.params.id
+        }
+    }).then((updated: any) => {
         res.send({
             data: updated,
             message: "Class retrieved successfully",

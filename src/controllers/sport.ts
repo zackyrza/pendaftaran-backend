@@ -19,7 +19,12 @@ export const getAll = (req: Request, res: Response) => {
 }
 
 export const getOne = (req: Request, res: Response) => {
-    db.Sport.findByPk(req.params.id).then((sport: any) => {
+    db.Sport.findOne({
+        include: { all: true, nested: true },
+        where: {
+            id: req.params.id
+        }
+    }).then((sport: any) => {
         res.send({
             data: sport,
             message: "Sport retrieved successfully",
