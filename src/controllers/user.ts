@@ -88,33 +88,32 @@ export const login = (req: Request, res: Response) => {
         },
     }).then(async (user: any) => {
         if (user) {
-            const hashPassword = await db.User.hashPassword(req.body.password);
-            if (db.User.isValidPassword(hashPassword, req.body.password)) {
+            if (db.User.isValidPassword(req.body.password, user.password)) {
                 const token = jwt.sign({ _id: user.id?.toString(), email: user.email }, SECRET_KEY, {
                     expiresIn: '1 days',
                 });
                 res.send({
                     data: user,
                     token,
-                    message: "User logged in successfully",
+                    message: "Berhasil Login",
                 });
             } else {
                 if (user.role !== "admin" && req.body.isCMS) {
-                    res.send({
+                    res.status(400).send({
                         data: null,
-                        message: "Only admin can logged in",
+                        message: "Hanya admin yang bisa login di CMS.",
                     });
                     return;
                 }
-                res.send({
+                res.status(400).send({
                     data: null,
-                    message: "Invalid password",
+                    message: "Password salah.",
                 });
             }
         } else {
-            res.send({
+            res.status(400).send({
                 data: null,
-                message: "User not found",
+                message: "User tidak ditemukan.",
             });
         }
     });
