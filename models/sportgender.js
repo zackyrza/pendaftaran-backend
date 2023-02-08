@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      SportGender.hasMany(models.Registration, {
+        foreignKey: 'sportGenderId',
+        as: 'registrations',
+        onDelete: 'CASCADE',
+      });
     }
   }
   SportGender.init({

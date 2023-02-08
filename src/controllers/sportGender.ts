@@ -3,6 +3,7 @@ import db from "../../models";
 
 export const getAll = (req: Request, res: Response) => {
     db.SportGender.findAll({
+        include: { all: true, nested: true },
         where: {
             deletedAt: null,
         },

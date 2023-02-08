@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Sport.hasMany(models.Class, {
+        foreignKey: 'sportId',
+        as: 'classes',
+        onDelete: 'CASCADE',
+      });
     }
   }
   Sport.init({

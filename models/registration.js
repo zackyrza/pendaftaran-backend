@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Registration.belongsTo(models.City, { foreignKey: 'cityId' });
-      Registration.belongsTo(models.Sport, { foreignKey: 'sportId' });
-      Registration.belongsTo(models.Class, { foreignKey: 'classId' });
-      Registration.belongsTo(models.SportGender, { foreignKey: 'sportGenderId' });
-      Registration.belongsTo(models.User, { foreignKey: 'userId' });
+      Registration.belongsTo(models.City, { foreignKey: 'cityId', as: 'city', onDelete: 'CASCADE' });
+      Registration.belongsTo(models.Sport, { foreignKey: 'sportId', as: 'sport', onDelete: 'CASCADE' });
+      Registration.belongsTo(models.Class, { foreignKey: 'classId', as: 'class', onDelete: 'CASCADE' });
+      Registration.belongsTo(models.SportGender, { foreignKey: 'sportGenderId', as: 'sportGender', onDelete: 'CASCADE' });
+      Registration.belongsTo(models.User, { foreignKey: 'userId', as: 'user', onDelete: 'CASCADE' });
     }
   }
   Registration.init({
