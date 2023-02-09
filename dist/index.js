@@ -15,12 +15,14 @@ const sportGender_1 = __importDefault(require("./src/routes/sportGender"));
 const registration_1 = __importDefault(require("./src/routes/registration"));
 const candidate_1 = __importDefault(require("./src/routes/candidate"));
 const mail_1 = __importDefault(require("./src/routes/mail"));
+const upload_1 = __importDefault(require("./src/routes/upload"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
 app.get('/', (req, res) => {
     res.send('Express + TypeScript Server');
 });
+app.use(express_1.default.static('./'));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)());
@@ -32,6 +34,7 @@ app.use('/api/sportGenders', sportGender_1.default);
 app.use('/api/registrations', registration_1.default);
 app.use('/api/candidates', candidate_1.default);
 app.use('/api/mails', mail_1.default);
+app.use('/api/uploads', upload_1.default);
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

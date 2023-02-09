@@ -19,13 +19,6 @@ module.exports = {
           key: 'id'
         }
       },
-      sportId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Sports',
-          key: 'id'
-        }
-      },
       classId: {
         type: Sequelize.INTEGER,
         references: {

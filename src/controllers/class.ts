@@ -32,6 +32,20 @@ export const getOne = (req: Request, res: Response) => {
     });
 }
 
+export const getAllBySportId = (req: Request, res: Response) => {
+    db.Class.findAll({
+        include: { all: true, nested: true },
+        where: {
+            sportId: req.params.id
+        }
+    }).then((updated: any) => {
+        res.send({
+            data: updated,
+            message: "Classes retrieved successfully",
+        });
+    });
+}
+
 export const create = (req: Request, res: Response) => {
     db.Class.create({...req.body, deletedAt: null}).then((updated: any) => {
         res.send({

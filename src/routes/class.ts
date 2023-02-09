@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import {getAll, getOne, update, create, remove} from "../controllers/class";
+import {getAll, getOne, update, create, remove, getAllBySportId} from "../controllers/class";
 import { auth } from "../middleware/auth";
 const router = express.Router();
 
@@ -9,6 +9,10 @@ router.get("/", (req: Request, res: Response) => {
 
 router.get("/:id", (req: Request, res: Response) => {
     getOne(req, res);
+});
+
+router.get("/sport/:id", (req: Request, res: Response) => {
+    getAllBySportId(req, res);
 });
 
 router.post("/", auth, (req: Request, res: Response) => {

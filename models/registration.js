@@ -13,16 +13,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Registration.belongsTo(models.City, { foreignKey: 'cityId', as: 'city', onDelete: 'CASCADE' });
-      Registration.belongsTo(models.Sport, { foreignKey: 'sportId', as: 'sport', onDelete: 'CASCADE' });
       Registration.belongsTo(models.Class, { foreignKey: 'classId', as: 'class', onDelete: 'CASCADE' });
       Registration.belongsTo(models.SportGender, { foreignKey: 'sportGenderId', as: 'sportGender', onDelete: 'CASCADE' });
       Registration.belongsTo(models.User, { foreignKey: 'userId', as: 'user', onDelete: 'CASCADE' });
+      Registration.hasMany(models.Candidate, { foreignKey: 'registrationId', as: 'candidates', onDelete: 'CASCADE' })
     }
   }
   Registration.init({
     quantity: DataTypes.INTEGER,
     cityId: DataTypes.INTEGER,
-    sportId: DataTypes.INTEGER,
     classId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     sportGenderId: DataTypes.INTEGER,
