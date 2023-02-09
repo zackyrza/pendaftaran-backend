@@ -1,8 +1,0 @@
-{
-    "SMTP_NAME": "mail.konikotim.com",
-    "SMTP_HOST": "mail.konikotim.com",
-    "SMTP_PORT": 465,
-    "SMTP_USERNAME": "info@konikotim.com",
-    "SMTP_PASSWORD": "*komim408",
-    "SMTP_SENDER": "info@konikotim.com"
-}
