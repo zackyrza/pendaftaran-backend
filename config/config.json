@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "rifqyzackyariadhy",
-    "password": "`12345678`",
+    "password": "12345678",
     "database": "pendaftaran",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "rifqyzackyariadhy",
-    "password": "`12345678`",
+    "password": "12345678",
     "database": "pendaftaran",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "rifqyzackyariadhy",
-    "password": "`12345678`",
+    "password": "12345678",
     "database": "pendaftaran",
     "host": "127.0.0.1",
     "dialect": "postgres"
