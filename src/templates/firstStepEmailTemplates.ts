@@ -1,5 +1,7 @@
 import { IFirstStepData, IFirstStepClassData, IFirstStepRegistrationsData } from "../interfaces/FirstStepEmail";
 
+const month = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sept","Okt","Nov","Des"];
+
 const registrationFirstStepEmail = function (dataString: string) {
   const data: IFirstStepData = JSON.parse(dataString);
   const putraCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
@@ -48,17 +50,17 @@ const registrationFirstStepEmail = function (dataString: string) {
                   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
                   .tg .tg-nrix{text-align:center;vertical-align:middle}
                 </style>
-                <table class="tg" style="undefined;table-layout: fixed; width: 542px">
+                <table class="tg" style="undefined;table-layout: fixed; width: 100%;">
                   <colgroup>
-                    <col style="width: 150px">
-                    <col style="width: 150px">
-                    <col style="width: 75px">
-                    <col style="width: 75px">
-                    <col style="width: 75px">
+                    <col style="width: 200px">
+                    <col style="width: 200px">
+                    <col style="width: 125px">
+                    <col style="width: 125px">
+                    <col style="width: 125px">
                   </colgroup>
                   <thead>
                     <tr>
-                      <th class="tg-cly1" colspan="5">
+                      <th colspan="5">
                         CABANG OLAHRAGA: ${data.sport.toUpperCase()}
                       </th>
                     </tr>
@@ -102,7 +104,7 @@ const registrationFirstStepEmail = function (dataString: string) {
                     <p style="text-align: center; font-size: 12px; border-top: 1px solid #000;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap KONI Kabupaten / Kota</p>
                   </div>
                   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.3;">
-                    <p style="text-align: center; font-size: 12px;">04-Jul-18</p>
+                    <p style="text-align: center; font-size: 12px;">${new Date().getDate()}-${month[new Date().getMonth()]}-${new Date().getFullYear()}</p>
                     <p style="text-align: center; font-size: 12px;">Tanggal</p>
                   </div>
                   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.35;">
