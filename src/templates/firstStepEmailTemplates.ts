@@ -37,8 +37,7 @@ const registrationFirstStepEmail = function (dataString: string) {
         <div class="container">
           <div class="card my-10">
             <div class="card-body">
-              <h1 class="h3 mb-2">Kabupaten / Kota ${data.city}</h1>
-              <h5 class="text-teal-700">Cabang Olahraga: ${data.sport}</h5>
+              <h5>KABUPATEN/KOTA ${data.city.toUpperCase()}</h5>
               <hr>
               <div class="space-y-3">
                 <style type="text/css">
@@ -59,17 +58,22 @@ const registrationFirstStepEmail = function (dataString: string) {
                   </colgroup>
                   <thead>
                     <tr>
-                      <th class="tg-nrix" rowspan="2">Jumlah Nomor Perlombaan / Pertandingan</th>
-                      <th class="tg-nrix" rowspan="2">Nomor Perlombaan / Pertandingan yang ditetapkan</th>
-                      <th class="tg-nrix" colspan="3">Nomor yang diikuti dan Jumlah Peserta</th>
-                    </tr>
-                    <tr>
-                      <th class="tg-nrix">Putra</th>
-                      <th class="tg-nrix">Putri</th>
-                      <th class="tg-nrix">Campuran</th>
+                      <th class="tg-cly1" colspan="5">
+                        CABANG OLAHRAGA: ${data.sport.toUpperCase()}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
+                    <tr>
+                      <td class="tg-nrix" rowspan="2">Jumlah Nomor Perlombaan / Pertandingan</td>
+                      <td class="tg-nrix" rowspan="2">Nomor Perlombaan / Pertandingan yang ditetapkan</td>
+                      <td class="tg-nrix" colspan="3">Nomor yang diikuti dan Jumlah Peserta</td>
+                    </tr>
+                    <tr>
+                      <td class="tg-nrix">Putra</td>
+                      <td class="tg-nrix">Putri</td>
+                      <td class="tg-nrix">Campuran</td>
+                    </tr>
                     ${data.class.map((item: IFirstStepClassData, index: number) => `
                     <tr>
                       <td class="tg-nrix">${index + 1}</td>
@@ -91,6 +95,26 @@ const registrationFirstStepEmail = function (dataString: string) {
                     </tr>
                   </tbody>
                 </table>
+                <hr>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 65px;">
+                  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.35;">
+                    <p style="text-align: center; font-size: 16px; font-weight: 600;">SIGIT K. YUNIANTO</p>
+                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap KONI Kabupaten / Kota</p>
+                  </div>
+                  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.3;">
+                    <p style="text-align: center; font-size: 12px;">04-Jul-18</p>
+                    <p style="text-align: center; font-size: 12px;">Tanggal</p>
+                  </div>
+                  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.35;">
+                    <p style="text-align: center; font-size: 16px; font-weight: 600;">KARUHEI</p>
+                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap Pengkab / Komda</p>
+                  </div>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
+                	<p style="text-align: center; font-size: 12px;">Formulir Pendaftaran Tahap 1 ini diterima oleh</p>
+                  <p style="text-align: center; font-size: 12px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah ${data.city}</p>
+                  <p style="text-align: center; font-size: 12px; font-weight: 600;">Pada Tanggal 9 s/d 10 Februari 2023 di Palangkaraya</p>
+                </div>
               </div>
             </div>
           </div>
