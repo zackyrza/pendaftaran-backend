@@ -3,3 +3,4 @@ dist
 .env
 .env.smtp
 uploads
+config/smtp.json
