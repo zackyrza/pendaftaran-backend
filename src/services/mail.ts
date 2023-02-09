@@ -60,7 +60,7 @@ export default class MailService {
         }
         return await this.transporter
             .sendMail({ 
-                from: `"KONI Kabupaten Kotawaringin Timur" ${process.env.SMTP_SENDER || options.from}`,
+                from: `"KONI Kabupaten Kotawaringin Timur" ${smtp.SMTP_SENDER || options.from}`,
                 to: options.to,
                 cc: options.cc,
                 bcc: options.bcc,
