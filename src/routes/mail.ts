@@ -17,6 +17,7 @@ router.post("/send/firstStep", auth, async (req: Request, res: Response) => {
         });
         res.status(200).send({ message: "Email sent" });
     } catch (error) {
+        console.log(error, '==============================')
         res.status(500).send({ message: "Failed to send email" });
     }
 });

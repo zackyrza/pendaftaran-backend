@@ -1,8 +1,8 @@
 {
-    "SMTP_NAME": "konikotim.com",
-    "SMTP_HOST": "mail.konikotim.com",
+    "SMTP_NAME": "mitraniagateknologi",
+    "SMTP_HOST": "smtpout.secureserver.net",
     "SMTP_PORT": 465,
-    "SMTP_USERNAME": "info@konikotim.com",
-    "SMTP_PASSWORD": "*komim408",
+    "SMTP_USERNAME": "tokoloak@mitraniagateknologi.com",
+    "SMTP_PASSWORD": "@TokoLoak123",
     "SMTP_SENDER": "info@konikotim.com"
 }
