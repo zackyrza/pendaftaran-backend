@@ -15,15 +15,14 @@ module.exports = (sequelize, DataTypes) => {
       Registration.belongsTo(models.City, { foreignKey: 'cityId', as: 'city', onDelete: 'CASCADE' });
       Registration.belongsTo(models.Class, { foreignKey: 'classId', as: 'class', onDelete: 'CASCADE' });
       Registration.belongsTo(models.SportGender, { foreignKey: 'sportGenderId', as: 'sportGender', onDelete: 'CASCADE' });
-      Registration.belongsTo(models.User, { foreignKey: 'userId', as: 'user', onDelete: 'CASCADE' });
       Registration.hasMany(models.Candidate, { foreignKey: 'registrationId', as: 'candidates', onDelete: 'CASCADE' })
     }
   }
   Registration.init({
+    email: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     cityId: DataTypes.INTEGER,
     classId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
     sportGenderId: DataTypes.INTEGER,
     deletedAt: DataTypes.DATE
   }, {
