@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     registrationId: DataTypes.INTEGER,
     status: DataTypes.STRING,
     nik: DataTypes.STRING,
+    photo: DataTypes.STRING,
     gender: DataTypes.STRING,
     placeOfBirth: DataTypes.STRING,
     birthDate: DataTypes.DATE,

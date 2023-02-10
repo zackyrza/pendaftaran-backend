@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import smtp from '../../config/smtp.json';
+import { Attachment } from 'nodemailer/lib/mailer';
 
 export interface MailInterface {
     from?: string;
@@ -9,6 +10,7 @@ export interface MailInterface {
     subject: string;
     text?: string;
     html: string;
+    attachments?: Attachment[];
 }
 
 export default class MailService {
@@ -67,6 +69,7 @@ export default class MailService {
                 subject: options.subject,
                 text: options.text,
                 html: options.html,
+                attachments: options.attachments,
             })
             .then((info) => {
                 console.log(`${requestId} - Mail sent successfully!!`);

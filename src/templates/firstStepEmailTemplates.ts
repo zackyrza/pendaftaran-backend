@@ -43,14 +43,14 @@ const registrationFirstStepEmail = function (dataString: string) {
               <hr>
               <div class="space-y-3">
                 <style type="text/css">
-                  .tg  {border-collapse:collapse;border-spacing:0;}
+                  .tg  {width:100%;border-collapse:collapse;border-spacing:0;border:solid 1px #000000;}
                   .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-                  overflow:hidden;padding:10px 5px;word-break:normal;}
+                  overflow:hidden;padding:10px 5px;word-break:normal;border:solid 1px #000000;}
                   .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-                  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-                  .tg .tg-nrix{text-align:center;vertical-align:middle}
+                  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;border:solid 1px #000000;}
+                  .tg .tg-nrix{text-align:center;vertical-align:middleborder:solid 1px #000000;}
                 </style>
-                <table class="tg" style="undefined;table-layout: fixed; width: 100%;">
+                <table class="tg">
                   <colgroup>
                     <col style="width: 200px">
                     <col style="width: 200px">
