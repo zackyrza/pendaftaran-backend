@@ -15,7 +15,7 @@ const router = express.Router();
 const mailService = MailService.getInstance();
 mailService.createConnection();
 
-router.post("/send/firstStep", auth, async (req: Request, res: Response) => {
+router.post("/send/firstStep", async (req: Request, res: Response) => {
     try {
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
@@ -46,7 +46,7 @@ router.post("/send/firstStep", auth, async (req: Request, res: Response) => {
     }
 });
 
-router.post("/send/secondStep", auth, async (req: Request, res: Response) => {
+router.post("/send/secondStep", async (req: Request, res: Response) => {
     try {
         let browser: Browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();

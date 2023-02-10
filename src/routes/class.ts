@@ -15,15 +15,15 @@ router.get("/sport/:id", (req: Request, res: Response) => {
     getAllBySportId(req, res);
 });
 
-router.post("/", auth, (req: Request, res: Response) => {
+router.post("/", (req: Request, res: Response) => {
     create(req, res);
 });
 
-router.put("/:id", auth, (req: Request, res: Response) => {
+router.put("/:id", (req: Request, res: Response) => {
     update(req, res);
 });
 
-router.delete("/:id", auth, (req: Request, res: Response) => {
+router.delete("/:id", (req: Request, res: Response) => {
     remove(req, res);
 });
     

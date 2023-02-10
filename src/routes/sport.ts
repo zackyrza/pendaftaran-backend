@@ -11,15 +11,15 @@ router.get("/:id", (req: Request, res: Response) => {
     getOne(req, res);
 });
 
-router.post("/", auth, (req: Request, res: Response) => {
+router.post("/", (req: Request, res: Response) => {
     create(req, res);
 });
 
-router.put("/:id", auth, (req: Request, res: Response) => {
+router.put("/:id", (req: Request, res: Response) => {
     update(req, res);
 });
 
-router.delete("/:id", auth, (req: Request, res: Response) => {
+router.delete("/:id", (req: Request, res: Response) => {
     remove(req, res);
 });
 
