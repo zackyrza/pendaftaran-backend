@@ -1,4 +1,6 @@
 // This file is used to generate the html template for the second step email
+import fs from 'fs';
+import path from 'path';
 import { ISecondStepEmailData } from "../interfaces/SecondStepEmail";
 
 const month = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
@@ -26,6 +28,8 @@ type candidateKey =
 
 const registrationSecondStepEmail = function (dataString: string) {
   const data: ISecondStepEmailData = JSON.parse(dataString);
+  const photo = path.join(process.cwd(), data.candidate.photo);
+  const photoUrl = "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
   
   const html = `
     <html>
@@ -88,7 +92,13 @@ const registrationSecondStepEmail = function (dataString: string) {
                         if (typeof value === 'string') {
                             value = value.toUpperCase();
                         }
-                        if (value === null || key === "email" || key === "photo" || key === "deletedAt" || key === "createdAt" || key === "updatedAt" || key === "id" || key === "registrationId") {
+                        if (
+                            value === null || key === "email" ||
+                            key === "photo" || key === "deletedAt" ||
+                            key === "createdAt" || key === "updatedAt" ||
+                            key === "id" || key === "registrationId" ||
+                            key === "ktp" || key === "ijazah"
+                        ) {
                             return;
                         }
                         switch (key) {
@@ -181,7 +191,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                                 </div>
                                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-end; flex: 0.35;">
                                     ${data.candidate.photo !== null ? `
-                                        <img src="http://pendaftaran-backend.mitraniagateknologi.com/${data.candidate.photo}" style="width: 70%; object-fit: contain;" />
+                                        <img src="${photoUrl}" style="width: 70%; object-fit: contain;" />
                                     ` : ''}
                                 </div>
                             </div>
@@ -203,11 +213,11 @@ const registrationSecondStepEmail = function (dataString: string) {
                             </div>
                             <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; margin-top: 65px;">
                                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.45;">
-                                    <p style="text-align: center; font-size: 16px; font-weight: 600; margin: 0;">SIGIT K. YULIANTO</p>
+                                    <p style="text-align: center; font-size: 16px; font-weight: 600; margin: 0;"></p>
                                     <p style="text-align: center; font-size: 12px; border-top: 1px solid #000; margin: 0;">Ketua / Sekretaris KONI Kabupaten / Kota</p>
                                 </div>
                                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.45;">
-                                    <p style="text-align: center; font-size: 16px; font-weight: 600; margin: 0;">KARUHEI T</p>
+                                    <p style="text-align: center; font-size: 16px; font-weight: 600; margin: 0;"></p>
                                     <p style="text-align: center; font-size: 12px; border-top: 1px solid #000; margin: 0;">Ketua / Sekretaris Pengkab / Pengkot</p>
                                 </div>
                             </div>
@@ -229,5 +239,21 @@ const registrationSecondStepEmail = function (dataString: string) {
   `;
   return html;
 };
+
+export const attachmentSecondStepEmail = (photoUrl: string, ijazahUrl: string) => {
+    const photo = path.join(process.cwd(), photoUrl);
+    const ijazah = path.join(process.cwd(), ijazahUrl);
+    const base64Photo = "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
+    const base64Ijazah = "data:image/png;base64," + fs.readFileSync(ijazah, { encoding: "base64" })
+    return `
+        <div style="display: flex; flex-direction: column; margin-top: 15px;">
+            <p style="text-align: center; font-size: 16px; font-weight: 60; margin: 0; margin-bottom: 20px; width: 100%;">Lampiran</p>
+            <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px; width: 100%;">Foto KTP</p>
+            <img src="${base64Photo}" style="width: 100%; height: 15vh; object-fit: contain;" />
+            <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px; width: 100%;">Foto Ijazah</p>
+            <img src="${base64Ijazah}" style="width: 100%; height: 40vh; object-fit: contain;" />
+        </div>
+    `
+}
 
 export default registrationSecondStepEmail;

@@ -100,7 +100,7 @@ const registrationFirstStepEmail = function (dataString: string) {
                 <hr>
                 <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 65px;">
                   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.35;">
-                    <p style="text-align: center; font-size: 16px; font-weight: 600;">SIGIT K. YUNIANTO</p>
+                    <p style="text-align: center; font-size: 16px; font-weight: 600;"></p>
                     <p style="text-align: center; font-size: 12px; border-top: 1px solid #000;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap KONI Kabupaten / Kota</p>
                   </div>
                   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.3;">
@@ -108,7 +108,7 @@ const registrationFirstStepEmail = function (dataString: string) {
                     <p style="text-align: center; font-size: 12px;">Tanggal</p>
                   </div>
                   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.35;">
-                    <p style="text-align: center; font-size: 16px; font-weight: 600;">KARUHEI</p>
+                    <p style="text-align: center; font-size: 16px; font-weight: 600;"></p>
                     <p style="text-align: center; font-size: 12px; border-top: 1px solid #000;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap Pengkab / Komda</p>
                   </div>
                 </div>

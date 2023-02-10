@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import { auth } from "../middleware/auth";
 import puppeteer, { Browser } from "puppeteer";
 import {PDFDocument} from "pdf-lib";
 import registrationFirstStepEmail from "../templates/firstStepEmailTemplates";
@@ -9,7 +8,7 @@ import { IFirstStepData } from "../interfaces/FirstStepEmail";
 import firstStepEmailHTML from "../templates/firstStepEmailHTML";
 import { ISecondStepData } from "../interfaces/SecondStepEmail";
 import secondStepEmailHTML from "../templates/secondStepEmailHTML";
-import registrationSecondStepEmail from "../templates/secondStepEmailTemplates";
+import registrationSecondStepEmail, { attachmentSecondStepEmail } from "../templates/secondStepEmailTemplates";
 const router = express.Router();
 
 const mailService = MailService.getInstance();
@@ -17,6 +16,9 @@ mailService.createConnection();
 
 router.post("/send/firstStep", async (req: Request, res: Response) => {
     try {
+        // for local
+        // const browser = await puppeteer.launch({ headless: true });
+        // for server
         const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'] });
         const page = await browser.newPage();
         const data: IFirstStepData = await generateDataForFirstStepEmail(
@@ -42,14 +44,17 @@ router.post("/send/firstStep", async (req: Request, res: Response) => {
         });
         res.status(200).send({ message: "Email sent" });
     } catch (error) {
-        console.log(error, '==============================');
+        console.log(error, 'error email ==============================');
         res.status(500).send({ message: "Failed to send email" });
     }
 });
 
 router.post("/send/secondStep", async (req: Request, res: Response) => {
     try {
-        let browser: Browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'] });
+        // for local
+        // const browser = await puppeteer.launch({ headless: true });
+        // for server
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'] });
         const page = await browser.newPage();
         const mergedPDF = await PDFDocument.create();
         const pdfFiles: Buffer[] = [];
@@ -59,8 +64,8 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
         );
         let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
 
-        for (const candidate of data.candidates) {
-            const html = await registrationSecondStepEmail(JSON.stringify(
+        for await (const candidate of data.candidates) {
+            const html = registrationSecondStepEmail(JSON.stringify(
                 {
                     sport: data.sport,
                     city: data.city,
@@ -70,12 +75,15 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             ));
             await page.setContent(html);
             pdfFiles.push(await page.pdf({ format: 'A4' }));
+            const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
+            await page.setContent(attachmentPdf);
+            pdfFiles.push(await page.pdf({ format: 'A4' }));
         }
 
-        for (const pdf of pdfFiles) {
+        for await (const pdf of pdfFiles) {
             const pdfDoc = await PDFDocument.load(pdf);
             const [pdfPage] = await mergedPDF.copyPages(pdfDoc, pdfDoc.getPageIndices());
-            await mergedPDF.addPage(pdfPage);
+            mergedPDF.addPage(pdfPage);
         }
 
         await browser.close();
@@ -94,7 +102,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
         });
         res.status(200).send({ message: "Email sent" });
     } catch (error) {
-        console.log(error, '==============================');
+        console.log(error, 'error email ==============================');
         res.status(500).send({ message: "Failed to send email" });
     }
 });

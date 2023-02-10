@@ -4,6 +4,8 @@ export interface ICandidateData {
     status: string,
     nik: string,
     photo: string,
+    ktp: string;
+    ijazah: string;
     gender: string,
     placeOfBirth: string,
     birthDate: Date,
