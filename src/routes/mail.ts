@@ -17,7 +17,7 @@ mailService.createConnection();
 
 router.post("/send/firstStep", async (req: Request, res: Response) => {
     try {
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium' });
         const page = await browser.newPage();
         const data: IFirstStepData = await generateDataForFirstStepEmail(
             req.body.caborId, req.body.cityId,
@@ -49,7 +49,7 @@ router.post("/send/firstStep", async (req: Request, res: Response) => {
 
 router.post("/send/secondStep", async (req: Request, res: Response) => {
     try {
-        let browser: Browser = await puppeteer.launch({ headless: true });
+        let browser: Browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium' });
         const page = await browser.newPage();
         const mergedPDF = await PDFDocument.create();
         const pdfFiles: Buffer[] = [];
