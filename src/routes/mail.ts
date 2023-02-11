@@ -122,6 +122,8 @@ router.post("/send/candidatesByCity", async (req: Request, res: Response) => {
             req.body.cityId,
         );
 
+        console.log(data, '==============================');
+
         let filename = "kandidat-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
 
         for await (const classItem of data.classes) {
