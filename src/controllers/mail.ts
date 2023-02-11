@@ -105,7 +105,7 @@ export const generateDataForSecondStepEmail = (classId: number, cityId: number):
                     where: {
                         registrationId: item.id,
                         deletedAt: {
-                            [Op.ne]: null,
+                            [Op.eq]: null,
                         },
                     },
                 });
