@@ -29,7 +29,7 @@ type candidateKey =
 const registrationSecondStepEmail = function (dataString: string) {
   const data: ISecondStepEmailData = JSON.parse(dataString);
     const photo = path.join(process.cwd(), data.candidate.photo);
-  const photoUrl = "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
+  const photoUrl = data.candidate.photo === "" ? "" : "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
   
   const html = `
     <html>
@@ -243,8 +243,8 @@ const registrationSecondStepEmail = function (dataString: string) {
 export const attachmentSecondStepEmail = (photoUrl: string, ijazahUrl: string) => {
     const photo = path.join(process.cwd(), photoUrl);
     const ijazah = path.join(process.cwd(), ijazahUrl);
-    const base64Photo = "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
-    const base64Ijazah = "data:image/png;base64," + fs.readFileSync(ijazah, { encoding: "base64" })
+    const base64Photo = photoUrl === "" ? "" : "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
+    const base64Ijazah = ijazahUrl === "" ? "" : "data:image/png;base64," + fs.readFileSync(ijazah, { encoding: "base64" })
     return `
         <div style="display: flex; flex-direction: column; margin-top: 15px;">
             <p style="text-align: center; font-size: 16px; font-weight: 60; margin: 0; margin-bottom: 20px; width: 100%;">Lampiran</p>
