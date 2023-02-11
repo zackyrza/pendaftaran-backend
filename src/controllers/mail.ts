@@ -104,6 +104,9 @@ export const generateDataForSecondStepEmail = (classId: number, cityId: number):
                 const data = await db.Candidate.findAll({
                     where: {
                         registrationId: item.id,
+                        deletedAt: {
+                            [Op.ne]: null,
+                        },
                     },
                 });
                 candidates.push(...data);
