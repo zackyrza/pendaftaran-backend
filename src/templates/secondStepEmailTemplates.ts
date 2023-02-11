@@ -243,6 +243,8 @@ const registrationSecondStepEmail = function (dataString: string) {
 export const attachmentSecondStepEmail = (photoUrl: string, ijazahUrl: string) => {
     const photo = path.join(process.cwd(), photoUrl);
     const ijazah = path.join(process.cwd(), ijazahUrl);
+    console.log(photo, 'photo ==============================');
+    console.log(ijazah, 'ijazah ==============================');
     const base64Photo = "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
     const base64Ijazah = "data:image/png;base64," + fs.readFileSync(ijazah, { encoding: "base64" })
     return `
