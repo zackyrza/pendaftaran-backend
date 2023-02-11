@@ -29,7 +29,6 @@ type candidateKey =
 const registrationSecondStepEmail = function (dataString: string) {
   const data: ISecondStepEmailData = JSON.parse(dataString);
   const photo = path.join(process.cwd(), data.candidate.photo);
-console.log(photo, 'photo ==============================');
   const photoUrl = "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
   
   const html = `
