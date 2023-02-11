@@ -20,6 +20,8 @@ export interface ICandidateData {
     occupation: string,
     maritalStatus: string,
     email: string,
+    shoesNumber: string,
+    shirtSize: string,
 }
 
 export interface ISecondStepData {

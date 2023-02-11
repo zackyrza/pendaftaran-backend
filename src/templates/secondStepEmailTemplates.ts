@@ -6,25 +6,29 @@ import { ISecondStepEmailData } from "../interfaces/SecondStepEmail";
 const month = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 
 type candidateKey =
-  | "name"
-  | "registrationId"
-  | "status"
-  | "nik"
-  | "gender"
-  | "placeOfBirth"
-  | "birthDate"
-  | "age"
-  | "education"
-  | "bloodType"
-  | "rhesusType"
-  | "weight"
-  | "height"
-  | "handphone"
-  | "religion"
-  | "occupation"
-  | "maritalStatus"
-  | "photo"
-  | "email";
+    "name"
+    | "registrationId"
+    | "status"
+    | "nik"
+    | "gender"
+    | "placeOfBirth"
+    | "birthDate"
+    | "age"
+    | "education"
+    | "bloodType"
+    | "rhesusType"
+    | "weight"
+    | "height"
+    | "handphone"
+    | "religion"
+    | "occupation"
+    | "maritalStatus"
+    | "photo"
+    | "email"
+    | "ktp"
+    | "ijazah"
+    | "shoesNumber"
+    | "shirtSize";
 
 const registrationSecondStepEmail = function (dataString: string) {
   const data: ISecondStepEmailData = JSON.parse(dataString);
@@ -149,6 +153,12 @@ const registrationSecondStepEmail = function (dataString: string) {
                                 break;
                             case 'maritalStatus':
                                 keyName = "STATUS PERKAWINAN";
+                                break;
+                            case 'shoesNumber':
+                                keyName = "NOMOR SEPATU";
+                                break;
+                            case 'shirtSize':
+                                keyName = "UKURAN BAJU";
                                 break;
                             default:
                                 break;

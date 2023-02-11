@@ -41,7 +41,9 @@ module.exports = (sequelize, DataTypes) => {
     occupation: DataTypes.STRING,
     maritalStatus: DataTypes.STRING,
     email: DataTypes.STRING,
-    deletedAt: DataTypes.DATE
+    deletedAt: DataTypes.DATE,
+    shoesNumber: DataTypes.STRING,
+    shirtSize: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Candidate',
