@@ -63,7 +63,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             req.body.classId, req.body.cityId,
         );
         let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
-
+            console.log(data.candidates, 'data.candidates ==============================')
         for await (const candidate of data.candidates) {
             const html = registrationSecondStepEmail(JSON.stringify(
                 {
