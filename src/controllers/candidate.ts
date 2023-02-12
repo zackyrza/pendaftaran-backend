@@ -63,7 +63,6 @@ export const getAllByCity = async (req: Request, res: Response) => {
     }).then((classes: any) => {
         const classIds = classes.map((classItem: any) => classItem.id);
         classIds.forEach((classId: number) => {
-            console.log(classId, 'classId ==============================')
             db.Registration.findAll({
                 where: {
                     cityId: req.body.cityId,
@@ -71,14 +70,7 @@ export const getAllByCity = async (req: Request, res: Response) => {
                 }
             }).then((registrations: any) => {
                 const registrationIds = registrations.map((registration: any) => registration.id);
-                if (registrationIds.length === 0) {
-                    if (classId === classIds[classIds.length - 1]) {
-                        console.log('no data found', '==============================')
-                        finallySend();
-                    }
-                }
                 registrationIds.forEach((registrationId: number, index: number) => {
-                    console.log(registrationIds, 'registrationIds ==============================')
                     db.Candidate.findAll({
                         where: {
                             registrationId,
