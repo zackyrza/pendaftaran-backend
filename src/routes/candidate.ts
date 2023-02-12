@@ -15,7 +15,7 @@ router.get("/registration/:id", (req: Request, res: Response) => {
     getAllByRegistration(req, res);
 });
 
-router.post("/city", (req: Request, res: Response) => {
+router.post("/idCard", (req: Request, res: Response) => {
     getAllByCity(req, res);
 });
 
