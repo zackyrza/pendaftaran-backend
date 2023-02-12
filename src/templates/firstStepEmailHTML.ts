@@ -351,7 +351,7 @@ const firstStepEmailHTML = (city: string, sport: string) => `
                         <tr>
                         <td>
                             <p>
-                                Dokumen Pendaftaran DICETAK dan di Verikasi olehKetua/Sekretaris KONI Kabupaten/ Kota dan Ketua/ Sekretars Pengkab/ Pengkot (Stampel dan TTD Basah)
+                                Dokumen Pendaftaran DICETAK dan di Verikasi oleh Ketua/Sekretaris KONI Kabupaten/Kota dan Ketua/Sekretaris Pengkab/Pengkot (Stampel dan TTD Basah)
                                 WAJIB di bawa pada saat pendaftaran TAHAP 3 (Tanggal sesuai ketentuan pada Buku Panduan) di KONI Kotawaringin Timur
                             </p>
                         </td>
