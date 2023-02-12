@@ -56,33 +56,33 @@ export const getAllByCity = async (req: Request, res: Response) => {
         });
     }
 
-    db.Class.findAll({
+    db.Registration.findAll({
         where: {
-            sportId: req.body.sportId,
-        }
-    }).then((classes: any) => {
-        const classIds = classes.map((classItem: any) => classItem.id);
-        classIds.forEach((classId: number) => {
-            db.Registration.findAll({
+            cityId: req.body.cityId,
+            deletedAt: null,
+        },
+        include: [
+            {
+                as: "classes",
+                model: db.Class,
                 where: {
-                    cityId: req.body.cityId,
-                    classId,
-                }
-            }).then((registrations: any) => {
-                const registrationIds = registrations.map((registration: any) => registration.id);
-                registrationIds.forEach((registrationId: number, index: number) => {
-                    db.Candidate.findAll({
-                        where: {
-                            registrationId,
-                        }
-                    }).then((candidate: any) => {
-                        candidates.push(...candidate);
-                        if (index === registrationIds.length - 1) {
-                            finallySend();
-                        }
-                    });
-                });
-            });
+                    sportId: req.body.sportId,
+                },
+            },
+            {
+                as: 'candidates',
+                model: db.Candidate,
+                where: {
+                    deletedAt: null,
+                },
+            }
+        ]
+    }).then((registrations: any) => {
+        registrations.forEach((registration: any, index: number) => {
+            candidates.push(...registration.candidates);
+            if (index === registrations.length - 1) {
+                finallySend();
+            }
         });
     });
 }
