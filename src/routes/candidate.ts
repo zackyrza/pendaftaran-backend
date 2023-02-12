@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import {getAll, getOne, update, create, remove, getAllByRegistration} from "../controllers/candidate";
+import {getAll, getOne, update, create, remove, getAllByRegistration, getAllByCity} from "../controllers/candidate";
 import { auth } from "../middleware/auth";
 const router = express.Router();
 
@@ -13,6 +13,10 @@ router.get("/:id", (req: Request, res: Response) => {
 
 router.get("/registration/:id", (req: Request, res: Response) => {
     getAllByRegistration(req, res);
+});
+
+router.post("/city", (req: Request, res: Response) => {
+    getAllByCity(req, res);
 });
 
 router.post("/", (req: Request, res: Response) => {

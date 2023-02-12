@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import db from "../../models";
+import { ICandidate } from "../interfaces/Candidate";
 
 export const getAll = (req: Request, res: Response) => {
     db.Candidate.findAll({
@@ -41,6 +42,47 @@ export const getAllByRegistration = (req: Request, res: Response) => {
         res.send({
             data: candidates,
             message: "Candidates retrieved successfully",
+        });
+    });
+}
+
+export const getAllByCity = (req: Request, res: Response) => {
+    let candidates: ICandidate[] = [];
+
+    const finallySend = () => {
+        res.send({
+            data: candidates,
+            message: "Candidates retrieved successfully",
+        });
+    }
+
+    db.Class.findAll({
+        where: {
+            sportId: req.body.sportId,
+        }
+    }).then((classes: any) => {
+        const classIds = classes.map((classItem: any) => classItem.id);
+        classIds.forEach((classId: number) => {
+            db.Registration.findAll({
+                where: {
+                    cityId: req.body.cityId,
+                    classId,
+                }
+            }).then((registrations: any) => {
+                const registrationIds = registrations.map((registration: any) => registration.id);
+                registrationIds.forEach((registrationId: number, index: number) => {
+                    db.Candidate.findAll({
+                        where: {
+                            registrationId,
+                        }
+                    }).then((candidate: any) => {
+                        candidates.push(candidate);
+                        if (index === registrationIds.length - 1) {
+                            finallySend();
+                        }
+                    });
+                });
+            });
         });
     });
 }
