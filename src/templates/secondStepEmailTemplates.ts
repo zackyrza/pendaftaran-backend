@@ -196,7 +196,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                                     </div>
                                     <div>
                                         <p style="font-size: 10px; margin: 0; margin-bottom: 5px;">
-                                            Form Tahap II kepada Panitia selambat-lambatnya pada tanggal 10 Februari 2023 di Sekretariat KONI Provinsi Kalimantan Tengah Palangkaraya.
+                                            Form Tahap II kepada Panitia selambat-lambatnya pada tanggal 10 Februari 2023 di Sekretariat KONI Kotawaringin Timur - Sampit.
                                         </p>
                                         <p style="font-size: 10px; margin: 0;">
                                             Pada Tahap III (Keabsahan Data) wajib membawa persyaratan atlet berupa KTP asli, KK asli, Akta Kelahiran asli / Ijazah Terakhir bagi yang berusia dibawah 17 tahun.
