@@ -350,10 +350,10 @@ const firstStepEmailHTML = (city: string, sport: string) => `
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                         <td>
-                            <p>Halo,</p>
-                            <p>Sesuai permintaan anda, berikut adalah lampiran laporan untuk data pendaftaran Tahap 1 dari kota ${city} cabang olahraga ${sport}</p>
-                            <p>Dokumen ini di generate otomatis oleh sistem aplikasi Pendaftaran PORPROV XII Kalimantan Tengah Tahun 2023</p>
-                            <p>Terima kasih!</p>
+                            <p>
+                                Dokumen Pendaftaran DICETAK dan di Verikasi olehKetua/Sekretaris KONI Kabupaten/ Kota dan Ketua/ Sekretars Pengkab/ Pengkot (Stampel dan TTD Basah)
+                                WAJIB di bawa pada saat pendaftaran TAHAP 3 (Tanggal sesuai ketentuan pada Buku Panduan) di KONI Kotawaringin Timur
+                            </p>
                         </td>
                         </tr>
                     </table>
