@@ -46,7 +46,7 @@ export const getAllByRegistration = (req: Request, res: Response) => {
     });
 }
 
-export const getAllByCity = (req: Request, res: Response) => {
+export const getAllByCity = async (req: Request, res: Response) => {
     let candidates: ICandidate[] = [];
 
     const finallySend = () => {
@@ -60,23 +60,23 @@ export const getAllByCity = (req: Request, res: Response) => {
         where: {
             sportId: req.body.sportId,
         }
-    }).then((classes: any) => {
+    }).then(async (classes: any) => {
         const classIds = classes.map((classItem: any) => classItem.id);
-        classIds.forEach((classId: number) => {
+        await classIds.forEach((classId: number) => {
             db.Registration.findAll({
                 where: {
                     cityId: req.body.cityId,
                     classId,
                 }
-            }).then((registrations: any) => {
+            }).then(async (registrations: any) => {
                 const registrationIds = registrations.map((registration: any) => registration.id);
-                registrationIds.forEach((registrationId: number, index: number) => {
+                await registrationIds.forEach((registrationId: number, index: number) => {
                     db.Candidate.findAll({
                         where: {
                             registrationId,
                         }
                     }).then((candidate: any) => {
-                        candidates.push(candidate);
+                        candidates.push(...candidate);
                         if (index === registrationIds.length - 1) {
                             finallySend();
                         }
