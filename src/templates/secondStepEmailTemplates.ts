@@ -60,7 +60,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                   overflow:hidden;padding:6px 3px;word-break:normal;border:solid 1px #000000;}
                   .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
                   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;border:solid 1px #000000;}
-                  .tg .tg-nrix{text-align:center;vertical-align:middleborder:solid 1px #000000; font-size: 12px;}
+                  .tg .tg-nrix{vertical-align:middle;border:solid 1px #000000; font-size: 12px;}
                 </style>
                 <table class="tg">
                   <colgroup>
@@ -158,7 +158,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                                 keyName = "NOMOR SEPATU";
                                 break;
                             case 'shirtSize':
-                                keyName = "UKURAN BAJU";
+                                keyName = "SIZE BAJU";
                                 break;
                             default:
                                 break;
@@ -173,31 +173,35 @@ const registrationSecondStepEmail = function (dataString: string) {
                     <tr>
                         <td colspan="2">
                             <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
-                                <div style="display: flex; flex-direction: column; flex: 0.65;">
-                                    <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
-                                        Syarat Keabsahan Data (dokumen yang wajib dilampirkan) :
-                                    </p>
-                                    <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
-                                        1. Fotocopy KTP (Kartu Tanda Penduduk);
-                                    </p>
-                                    <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
-                                        2. Fotocopy KK (Kartu Keluarga);
-                                    </p>
-                                    <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
-                                        3. Fotocopy Akta Kelahiran;
-                                    </p>
-                                    <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
-                                        4. Fotocopy Ijazah Terakhir bagi yang berusia dibawah 17 tahun;
-                                    </p>
-                                    <p style="font-size: 10px; margin: 0; margin-bottom: 5px;">
-                                        5. Pas Foto 3 x 4 sebanyak 3 lembar.
-                                    </p>
-                                    <p style="font-size: 10px; margin: 0; margin-bottom: 5px;">
-                                        Form Tahap II kepada Panitia selambat-lambatnya pada tanggal 10 Februari 2023 di Sekretariat KONI Provinsi Kalimantan Tengah Palangkaraya.
-                                    </p>
-                                    <p style="font-size: 10px; margin: 0;">
-                                        Pada Tahap III (Keabsahan Data) wajib membawa persyaratan atlet berupa KTP asli, KK asli, Akta Kelahiran asli / Ijazah Terakhir bagi yang berusia dibawah 17 tahun.
-                                    </p>
+                                <div style="display: flex; flex-direction: column; justify-content: space-between; flex: 0.65;">
+                                    <div>
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
+                                            Syarat Keabsahan Data (dokumen yang wajib dilampirkan) :
+                                        </p>
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
+                                            1. Fotocopy KTP (Kartu Tanda Penduduk);
+                                        </p>
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
+                                            2. Fotocopy KK (Kartu Keluarga);
+                                        </p>
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
+                                            3. Fotocopy Akta Kelahiran;
+                                        </p>
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
+                                            4. Fotocopy Ijazah Terakhir bagi yang berusia dibawah 17 tahun;
+                                        </p>
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 5px;">
+                                            5. Pas Foto 3 x 4 sebanyak 3 lembar.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 5px;">
+                                            Form Tahap II kepada Panitia selambat-lambatnya pada tanggal 10 Februari 2023 di Sekretariat KONI Provinsi Kalimantan Tengah Palangkaraya.
+                                        </p>
+                                        <p style="font-size: 10px; margin: 0;">
+                                            Pada Tahap III (Keabsahan Data) wajib membawa persyaratan atlet berupa KTP asli, KK asli, Akta Kelahiran asli / Ijazah Terakhir bagi yang berusia dibawah 17 tahun.
+                                        </p>
+                                    </div>
                                 </div>
                                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-end; flex: 0.35;">
                                     ${data.candidate.photo !== null ? `
@@ -211,7 +215,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                             <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 100%;">
                                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.45;">
                                     <p style="text-align: center; font-size: 14px; margin: 0;">
-                                        Palangkaraya / ${new Date().getDate()} ${month[new Date().getMonth()]} ${new Date().getFullYear()}
+                                        ${new Date().getDate()} ${month[new Date().getMonth()]} ${new Date().getFullYear()}
                                     </p>
                                     <p style="text-align: center; font-size: 13px; border-bottom: 1px solid #000; margin: 0; margin-top: 45px;">
                                         ${data.candidate.name}
@@ -235,6 +239,10 @@ const registrationSecondStepEmail = function (dataString: string) {
                     </tr>
                   </tbody>
                 </table>
+                <div style="display: flex; flex-direction: column; margin-top: 5px;">
+                    <p style="font-size: 9px; margin: 0; margin-bottom: 5px;">*Wajib TTD dan Cap Stampel Ketua / Sekretaris KONI Kabupaten / Kota</p>
+                    <p style="font-size: 9px; margin: 0; margin-bottom: 5px;">*Wajib TTD dan Cap Stampel Ketua / Sekretaris Pengkab / Pengkot</p>
+                </div>
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
                     <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Formulir Pendaftaran Tahap 2 ini diterima oleh</p>
                     <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah ${data.city}</p>
