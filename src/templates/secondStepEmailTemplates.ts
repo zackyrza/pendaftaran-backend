@@ -48,9 +48,9 @@ const registrationSecondStepEmail = function (dataString: string) {
           <div class="card my-10">
             <div class="card-body">
               <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
-                <p style="font-size: 14px; font-weight: 600; text-align: center; margin: 0; margin-bottom: 10px;">PORPROV XII TAHUN 2023 KALIMANTAN TENGAH - BARITO UTARA</p>
-                <p style="font-size: 14px; font-weight: 600; text-align: center; margin: 0; margin-bottom: 10px;">FORM TAHAP II</p>
-                <p style="font-size: 14px; text-align: center; margin: 0; margin-bottom: 10px;">Dilaksanakan pada tanggal 9 - 10 Februari 2023 di Palangkaraya</p>
+                <p style="font-size: 14px; font-weight: 500; text-align: center; margin: 0; margin-bottom: 10px;">PORPROV XII TAHUN 2023 KALIMANTAN TENGAH - KOTAWARINGIN TIMUR</p>
+                <p style="font-size: 14px; font-weight: 500; text-align: center; margin: 0; margin-bottom: 10px;">FORM TAHAP II</p>
+                <p style="font-size: 14px; text-align: center; margin: 0; margin-bottom: 10px;">Dilaksanakan pada tanggal _________ Juni 2023 di Sampit</p>
               </div>
               <hr>
               <div class="space-y-3">
@@ -205,7 +205,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                                 </div>
                                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-end; flex: 0.35;">
                                     ${data.candidate.photo !== null ? `
-                                        <img src="${photoUrl}" style="width: 70%; object-fit: contain;" />
+                                        <img src="${photoUrl}" style="width: 50%; object-fit: contain;" />
                                     ` : ''}
                                 </div>
                             </div>
@@ -245,8 +245,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
                     <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Formulir Pendaftaran Tahap 2 ini diterima oleh</p>
-                    <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah ${data.city}</p>
-                    <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Pada Tanggal 19 Juni 2023</p>
+                    <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah Kotawaringin Timur</p>
                 </div>
               </div>
             </div>
