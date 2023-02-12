@@ -63,7 +63,7 @@ export const getAllByCity = async (req: Request, res: Response) => {
         },
         include: [
             {
-                as: "classes",
+                as: "class",
                 model: db.Class,
                 where: {
                     sportId: req.body.sportId,
@@ -77,13 +77,14 @@ export const getAllByCity = async (req: Request, res: Response) => {
                 },
             }
         ]
-    }).then((registrations: any) => {
-        registrations.forEach((registration: any, index: number) => {
-            candidates.push(...registration.candidates);
-            if (index === registrations.length - 1) {
-                finallySend();
+    }).then(async (registrations: any) => {
+        for await (const registration of registrations) {
+            if (registration.candidates.length === 0) {
+                continue;
             }
-        });
+            candidates.push(...registration.candidates);
+        }
+        finallySend();
     });
 }
 
