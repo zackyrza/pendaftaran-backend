@@ -60,17 +60,17 @@ export const getAllByCity = async (req: Request, res: Response) => {
         where: {
             sportId: req.body.sportId,
         }
-    }).then(async (classes: any) => {
+    }).then((classes: any) => {
         const classIds = classes.map((classItem: any) => classItem.id);
-        await classIds.forEach((classId: number) => {
+        classIds.forEach((classId: number) => {
             db.Registration.findAll({
                 where: {
                     cityId: req.body.cityId,
                     classId,
                 }
-            }).then(async (registrations: any) => {
+            }).then((registrations: any) => {
                 const registrationIds = registrations.map((registration: any) => registration.id);
-                await registrationIds.forEach((registrationId: number, index: number) => {
+                registrationIds.forEach((registrationId: number, index: number) => {
                     db.Candidate.findAll({
                         where: {
                             registrationId,
