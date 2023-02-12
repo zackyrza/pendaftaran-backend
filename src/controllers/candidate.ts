@@ -77,7 +77,7 @@ export const getAllByCity = async (req: Request, res: Response) => {
                         }
                     }).then((candidate: any) => {
                         candidates.push(...candidate);
-                        if (index === registrationIds.length - 1 && classId === classIds[classIds.length - 1]) {
+                        if (index === registrationIds.length - 1) {
                             finallySend();
                         }
                     });
