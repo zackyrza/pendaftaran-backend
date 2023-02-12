@@ -75,6 +75,7 @@ export const getAllByCity = async (req: Request, res: Response) => {
                 where: {
                     deletedAt: null,
                 },
+                include: { all: true, nested: true }
             }
         ]
     }).then(async (registrations: any) => {
