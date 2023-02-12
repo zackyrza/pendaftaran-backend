@@ -29,7 +29,7 @@ router.post("/send/firstStep", async (req: Request, res: Response) => {
         let filename = "pendaftaran-tahap-1-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
         const html = registrationFirstStepEmail(JSON.stringify(data));
         await page.setContent(html);
-        const pdf = await page.pdf({ format: 'A4' });
+        const pdf = await page.pdf({ format: 'Legal' });
         await browser.close();
         const emailHtml = firstStepEmailHTML(data.city, data.sport);
 
@@ -75,10 +75,10 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
                 }
             ));
             await page.setContent(html);
-            pdfFiles.push(await page.pdf({ format: 'A4' }));
+            pdfFiles.push(await page.pdf({ format: 'Legal' }));
             const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
             await page.setContent(attachmentPdf);
-            pdfFiles.push(await page.pdf({ format: 'A4' }));
+            pdfFiles.push(await page.pdf({ format: 'Legal' }));
         }
 
         for await (const pdf of pdfFiles) {
@@ -122,8 +122,6 @@ router.post("/send/candidatesByCity", async (req: Request, res: Response) => {
             req.body.cityId,
         );
 
-        console.log(data, '==============================');
-
         let filename = "kandidat-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
 
         for await (const classItem of data.classes) {
@@ -137,10 +135,10 @@ router.post("/send/candidatesByCity", async (req: Request, res: Response) => {
                     }
                 ));
                 await page.setContent(html);
-                pdfFiles.push(await page.pdf({ format: 'A4' }));
+                pdfFiles.push(await page.pdf({ format: 'Legal' }));
                 const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
                 await page.setContent(attachmentPdf);
-                pdfFiles.push(await page.pdf({ format: 'A4' }));
+                pdfFiles.push(await page.pdf({ format: 'Legal' }));
             }
         }
 
