@@ -5,14 +5,14 @@ const month = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sept","Okt","Nov
 const registrationFirstStepEmail = function (dataString: string) {
   const data: IFirstStepData = JSON.parse(dataString);
   const putraCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
-    const putra = item.registrations.find((reg: IFirstStepRegistrationsData) => reg.name === "Putra");
+    const putra = item.registrations.find((reg: IFirstStepRegistrationsData) => reg.name === "Laki - Laki");
     if (putra) {
       return acc + putra.total;
     }
     return acc;
   }, 0);
   const putriCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
-    const putri = item.registrations.find((reg: IFirstStepRegistrationsData) => reg.name === "Putri");
+    const putri = item.registrations.find((reg: IFirstStepRegistrationsData) => reg.name === "Perempuan");
     if (putri) {
       return acc + putri.total;
     }
@@ -44,7 +44,7 @@ const registrationFirstStepEmail = function (dataString: string) {
               <div class="space-y-3">
                 <style type="text/css">
                   .tg  {width:100%;border-collapse:collapse;border-spacing:0;border:solid 1px #000000;}
-                  .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                  .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:12px;
                   overflow:hidden;padding:10px 5px;word-break:normal;border:solid 1px #000000;}
                   .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
                   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;border:solid 1px #000000;}
