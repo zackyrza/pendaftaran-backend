@@ -245,7 +245,7 @@ const registrationSecondStepEmail = function (dataString: string) {
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
                     <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Formulir Pendaftaran Tahap 2 ini diterima oleh</p>
-                    <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah Kotawaringin Timur</p>
+                    <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah</p>
                 </div>
               </div>
             </div>
