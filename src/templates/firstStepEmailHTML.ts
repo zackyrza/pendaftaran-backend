@@ -350,19 +350,15 @@ const firstStepEmailHTML = (city: string, sport: string) => `
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                         <td>
-                            <p>
+                            <p style="margin-bottom: 10px;">
                                 Saat melakukan pendaftaran Tahap 3 (tanggal sesuai ketentuan pada buku panduan) di <b>WAJIBKAN</b> membawa Syarat Keabsahan Data :
                             </p>
-                            <ol>
-                                <li>Fotocopy KTP (Kartu Tanda Penduduk);</li>
-                                <li>Fotocopy KK (Kartu Keluarga);</li>
-                                <li>Fotocopy Akta Kelahiran;</li>
-                                <li>Fotocopy Ijazah Terakhir bagi yang berusia dibawah 17 Tahun;</li>
-                                <li>Pas Foto 3x4 sebanyak 3 lembar;</li>
-                                <li>
-                                    Dokumen Pendaftaran Tahap 1 dan Tahap 2 DICETAK dan di Verifikasi oleh Ketua/Sekretaris KONI Kabupaten/Kota dan Ketua/Sekretaris Pengkab/Pengkot (Stampel dan TTD Basah);
-                                </li>
-                            </ol>
+                            <p style="margin: 0;">1. Fotocopy KTP (Kartu Tanda Penduduk);</p>
+                            <p style="margin: 0;">2. Fotocopy KK (Kartu Keluarga);</p>
+                            <p style="margin: 0;">3. Fotocopy Akta Kelahiran;</p>
+                            <p style="margin: 0;">4. Fotocopy Ijazah Terakhir bagi yang berusia dibawah 17 Tahun;</p>
+                            <p style="margin: 0;">5. Pas Foto 3x4 sebanyak 3 lembar;</p>
+                            <p style="margin: 0;">6. Dokumen Pendaftaran Tahap 1 dan Tahap 2 DICETAK dan di Verifikasi oleh Ketua/Sekretaris KONI Kabupaten/Kota dan Ketua/Sekretaris Pengkab/Pengkot (Stampel dan TTD Basah);</p>
                         </td>
                         </tr>
                     </table>
