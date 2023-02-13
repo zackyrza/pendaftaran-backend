@@ -114,7 +114,7 @@ const registrationFirstStepEmail = function (dataString: string) {
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
                 	<p style="text-align: center; font-size: 12px;">Formulir Pendaftaran Tahap 1 ini diterima oleh</p>
-                  <p style="text-align: center; font-size: 12px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah ${data.city}</p>
+                  <p style="text-align: center; font-size: 12px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah</p>
                   <p style="text-align: center; font-size: 12px;">Pada Tanggal 19 Juni 2023</p>
                 </div>
               </div>

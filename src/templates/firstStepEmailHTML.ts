@@ -351,9 +351,18 @@ const firstStepEmailHTML = (city: string, sport: string) => `
                         <tr>
                         <td>
                             <p>
-                                Dokumen Pendaftaran DICETAK dan di Verifikasi oleh Ketua/Sekretaris KONI Kabupaten/Kota dan Ketua/Sekretaris Pengkab/Pengkot (Stampel dan TTD Basah)
-                                WAJIB di bawa pada saat pendaftaran TAHAP 3 (Tanggal sesuai ketentuan pada Buku Panduan) di KONI Kotawaringin Timur
+                                Saat melakukan pendaftaran Tahap 3 (tanggal sesuai ketentuan pada buku panduan) di <b>WAJIBKAN</b> membawa Syarat Keabsahan Data :
                             </p>
+                            <ol>
+                                <li>Fotocopy KTP (Kartu Tanda Penduduk);</li>
+                                <li>Fotocopy KK (Kartu Keluarga);</li>
+                                <li>Fotocopy Akta Kelahiran;</li>
+                                <li>Fotocopy Ijazah Terakhir bagi yang berusia dibawah 17 Tahun;</li>
+                                <li>Pas Foto 3x4 sebanyak 3 lembar;</li>
+                                <li>
+                                    Dokumen Pendaftaran Tahap 1 dan Tahap 2 DICETAK dan di Verifikasi oleh Ketua/Sekretaris KONI Kabupaten/Kota dan Ketua/Sekretaris Pengkab/Pengkot (Stampel dan TTD Basah);
+                                </li>
+                            </ol>
                         </td>
                         </tr>
                     </table>
