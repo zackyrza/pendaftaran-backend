@@ -40,12 +40,14 @@ export const create = (req: Request, res: Response) => {
             deletedAt: null,
             email: req.body.email,
         }
-    }).then(() => {
-        res.send({
-            data: null,
-            message: "Email already exists",
-        });
-    }).catch(() => {
+    }).then((user: any[]) => {
+        if (user.length > 0) {
+            res.status(400).send({
+                data: null,
+                message: "Email sudah terdaftar.",
+            });
+            return;
+        }
         db.User.create({...req.body, deletedAt: null}).then((user: any) => {
             res.send({
                 data: user,
