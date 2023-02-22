@@ -22,7 +22,8 @@ export const getOne = (req: Request, res: Response) => {
     db.Class.findOne({
         include: { all: true, nested: true },
         where: {
-            id: req.params.id
+            id: req.params.id,
+            deletedAt: null,
         }
     }).then((updated: any) => {
         res.send({
@@ -36,7 +37,8 @@ export const getAllBySportId = (req: Request, res: Response) => {
     db.Class.findAll({
         include: { all: true, nested: true },
         where: {
-            sportId: req.params.id
+            sportId: req.params.id,
+            deletedAt: null,
         }
     }).then((updated: any) => {
         res.send({

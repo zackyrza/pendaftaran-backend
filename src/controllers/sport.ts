@@ -22,7 +22,8 @@ export const getOne = (req: Request, res: Response) => {
     db.Sport.findOne({
         include: { all: true, nested: true },
         where: {
-            id: req.params.id
+            id: req.params.id,
+            deletedAt: null,
         }
     }).then((sport: any) => {
         res.send({

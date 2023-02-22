@@ -23,7 +23,8 @@ export const getOne = (req: Request, res: Response) => {
     db.Candidate.findOne({
         include: { all: true, nested: true },
         where: {
-            id: req.params.id
+            id: req.params.id,
+            deletedAt: null,
         }
     }).then((candidate: any) => {
         res.send({
@@ -37,6 +38,7 @@ export const getAllByRegistration = (req: Request, res: Response) => {
     db.Candidate.findAll({
         where: {
             registrationId: req.params.id,
+            deletedAt: null,
         }
     }).then((candidates: any) => {
         res.send({
@@ -67,6 +69,7 @@ export const getAllByCity = async (req: Request, res: Response) => {
                 model: db.Class,
                 where: {
                     sportId: req.body.sportId,
+                    deletedAt: null,
                 },
             },
             {
