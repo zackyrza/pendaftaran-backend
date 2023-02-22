@@ -8,17 +8,20 @@ export const generateDataForFirstStepEmail = (caborId: number, cityId: number): 
     return new Promise((resolve, reject) => {
         const sports = db.Sport.findOne({
             where: {
-                id: caborId
+                id: caborId,
+                deletedAt: null,
             },
         });
         const cities = db.City.findOne({
             where: {
-                id: cityId
+                id: cityId,
+                deletedAt: null,
             }
         });
         const classes = db.Class.findAll({
             where: {
                 sportId: caborId,
+                deletedAt: null,
             },
             include: [
                 {
@@ -29,6 +32,7 @@ export const generateDataForFirstStepEmail = (caborId: number, cityId: number): 
                         sportGenderId: {
                             [Op.ne]: null,
                         },
+                        deletedAt: null,
                     },
                     include: [
                         {
@@ -68,11 +72,13 @@ export const generateDataForSecondStepEmail = (classId: number, cityId: number):
         const city = db.City.findOne({
             where: {
                 id: cityId,
+                deletedAt: null,
             },
         });
         const classType = db.Class.findOne({
             where: {
                 id: classId,
+                deletedAt: null,
             },
             include: [
                 {
@@ -88,7 +94,18 @@ export const generateDataForSecondStepEmail = (classId: number, cityId: number):
                 sportGenderId: {
                     [Op.ne]: null,
                 },
+                deletedAt: null,
             },
+            include: [
+                {
+                    as: 'candidates',
+                    model: db.Candidate,
+                    where: {
+                        deletedAt: null,
+                    },
+                    include: { all: true, nested: true }
+                }
+            ]
         });
 
         Promise.all([city, classType, registrations]).then(async (values) => {
@@ -101,20 +118,13 @@ export const generateDataForSecondStepEmail = (classId: number, cityId: number):
                     candidates,
                 });
             }
-            values[2].map(async (item: any, index: number) => {
-                const data = await db.Candidate.findAll({
-                    where: {
-                        registrationId: item.id,
-                        deletedAt: {
-                            [Op.eq]: null,
-                        },
-                    },
-                });
-                candidates.push(...data);
-                if (index === values[2].length - 1) {
-                    afterFetchCandidates();
+            for await (const registration of values[2]) {
+                if (registration.candidates.length === 0) {
+                    continue;
                 }
-            });
+                candidates.push(...registration.candidates);
+            }
+            afterFetchCandidates();
         });
     });
 }
