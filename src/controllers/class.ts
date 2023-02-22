@@ -39,7 +39,10 @@ export const getAllBySportId = (req: Request, res: Response) => {
         where: {
             sportId: req.params.id,
             deletedAt: null,
-        }
+        },
+        order: [
+            ['createdAt', 'ASC'],
+        ]
     }).then((updated: any) => {
         res.send({
             data: updated,
