@@ -1,4 +1,4 @@
-import { IFirstStepData, IFirstStepClassData, IFirstStepRegistrationsData } from "../interfaces/FirstStepEmail";
+import { IFirstStepData, IFirstStepClassData } from "../interfaces/FirstStepEmail";
 
 const month = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sept","Okt","Nov","Des"];
 
