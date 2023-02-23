@@ -7,7 +7,6 @@ const registrationFirstStepEmail = function (dataString: string) {
   const putraCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
     const putra = item.registrations.find(t => t.name === 'Laki - Laki');
     if (putra) {
-      console.log(putra, 'laki - laki ==============================');
       return acc + putra.total;
     }
     return acc;
@@ -15,7 +14,6 @@ const registrationFirstStepEmail = function (dataString: string) {
   const putriCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
     const putri = item.registrations.find(t => t.name === 'Perempuan');
     if (putri) {
-      console.log(putri, 'perempuan ==============================')
       return acc + putri.total;
     }
     return acc;
@@ -82,9 +80,9 @@ const registrationFirstStepEmail = function (dataString: string) {
                     <tr>
                       <td class="tg-nrix">${index + 1}</td>
                       <td class="tg-nrix">${item.name}</td>
-                      <td class="tg-nrix">${item.registrations?.[0]?.total ?? 0}</td>
-                      <td class="tg-nrix">${item.registrations?.[1]?.total ?? 0}</td>
-                      <td class="tg-nrix">${item.registrations?.[2]?.total ?? 0}</td>
+                      <td class="tg-nrix">${item.registrations?.find(t => t.name === 'Laki - Laki')?.total ?? 0}</td>
+                      <td class="tg-nrix">${item.registrations?.find(t => t.name === 'Perempuan')?.total ?? 0}</td>
+                      <td class="tg-nrix">${item.registrations?.find(t => t.name === 'Campuran')?.total ?? 0}</td>
                     </tr>
                     `).join("")}
                     <tr>
