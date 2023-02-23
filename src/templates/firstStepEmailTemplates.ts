@@ -4,6 +4,7 @@ const month = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sept","Okt","Nov
 
 const registrationFirstStepEmail = function (dataString: string) {
   const data: IFirstStepData = JSON.parse(dataString);
+  console.log(JSON.stringify(data.class), '==============================')
   const putraCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
     const putra = item.registrations.filter(t => t.name === 'Laki - Laki')[0];
     if (putra) {
