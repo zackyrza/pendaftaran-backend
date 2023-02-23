@@ -4,23 +4,24 @@ const month = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sept","Okt","Nov
 
 const registrationFirstStepEmail = function (dataString: string) {
   const data: IFirstStepData = JSON.parse(dataString);
-  console.log(JSON.stringify(data.class), '==============================')
   const putraCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
-    const putra = item.registrations.filter(t => t.name === 'Laki - Laki')[0];
+    const putra = item.registrations.find(t => t.name === 'Laki - Laki');
     if (putra) {
+      console.log(putra, 'laki - laki ==============================');
       return acc + putra.total;
     }
     return acc;
   }, 0);
   const putriCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
-    const putri = item.registrations.filter(t => t.name === 'Perempuan')[0];
+    const putri = item.registrations.find(t => t.name === 'Perempuan');
     if (putri) {
+      console.log(putri, 'perempuan ==============================')
       return acc + putri.total;
     }
     return acc;
   }, 0);
   const campuranCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
-    const campuran = item.registrations.filter(t => t.name === 'Campuran')[0];
+    const campuran = item.registrations.find(t => t.name === 'Campuran');
     if (campuran) {
       return acc + campuran.total;
     }
