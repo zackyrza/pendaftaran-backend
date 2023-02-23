@@ -101,7 +101,8 @@ const registrationSecondStepEmail = function (dataString: string) {
                             key === "photo" || key === "deletedAt" ||
                             key === "createdAt" || key === "updatedAt" ||
                             key === "id" || key === "registrationId" ||
-                            key === "ktp" || key === "ijazah"
+                            key === "ktp" || key === "ijazah" ||
+                            key === 'registration'
                         ) {
                             return;
                         }
