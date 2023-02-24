@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import puppeteer from "puppeteer";
+import path from "path";
 import {PDFDocument} from "pdf-lib";
 import registrationFirstStepEmail from "../templates/firstStepEmailTemplates";
 import MailService from "../services/mail";
@@ -200,6 +201,29 @@ router.post("/generate/secondStep", async (req: Request, res: Response) => {
                     send();
                 }
         });
+    } catch (error) {
+        res.status(500).send({ message: "Failed to generate data for second step" });
+    }
+});
+
+router.post("/upload/secondStep", async (req: Request, res: Response) => {
+    try {
+        const { city, sport, className, email, pdf } = req.body;
+        const emailHtml = secondStepEmailHTML(city, sport, className);
+        let filename = "pendaftaran-tahap-2-cabor-" + sport.toLowerCase().split(" ").join("-") + "-kabupaten/kota-" + city.toLowerCase().split(" ").join("-") + ".pdf";
+        const pdfFinal = path.join(process.cwd(), pdf);
+        await mailService.sendMail(req.headers.Authorization, {
+            to: email,
+            subject: `Pendaftaran tahap 2 untuk ${sport} dari Kabupaten / Kota ${city}`,
+            html: emailHtml,
+            attachments: [
+                {
+                    filename,
+                    path: pdfFinal,
+                }
+            ],
+        });
+        res.status(200).send({ message: "Email sent" });
     } catch (error) {
         console.log(error, 'error email ==============================');
         res.status(500).send({ message: "Failed to send email" });
