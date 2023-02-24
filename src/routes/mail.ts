@@ -149,8 +149,8 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
             await page.setContent(attachmentPdf);
             pdfFiles.push(await page.pdf({ format: 'Legal' }));
-            console.log(candidate.name, data.candidates.findIndex((item) => item.email === candidate.email), data.candidates.length - 1, '==============================')
-            if (data.candidates.findIndex((item) => item.email === candidate.email) === data.candidates.length - 1) {
+            console.log(candidate.name, data.candidates.findIndex((item) => item.name === candidate.name), data.candidates.length - 1, '==============================')
+            if (data.candidates.findIndex((item) => item.name === candidate.name) === data.candidates.length - 1) {
                 await runPdfFiles();
             }
         }
