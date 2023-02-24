@@ -48,19 +48,19 @@ const registrationSecondStepEmail = function (dataString: string) {
           <div class="card my-10">
             <div class="card-body">
               <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
-                <p style="font-size: 10px; font-weight: 500; text-align: center; margin: 0; margin-bottom: 10px;">PORPROV XII TAHUN 2023 KALIMANTAN TENGAH - KOTAWARINGIN TIMUR</p>
-                <p style="font-size: 10px; font-weight: 500; text-align: center; margin: 0; margin-bottom: 10px;">FORM TAHAP II</p>
-                <p style="font-size: 10px; text-align: center; margin: 0; margin-bottom: 10px;">Dilaksanakan pada tanggal _________ Juni 2023 di Sampit</p>
+                <p style="font-size: 14px; font-weight: 500; text-align: center; margin: 0; margin-bottom: 10px;">PORPROV XII TAHUN 2023 KALIMANTAN TENGAH - KOTAWARINGIN TIMUR</p>
+                <p style="font-size: 14px; font-weight: 500; text-align: center; margin: 0; margin-bottom: 10px;">FORM TAHAP II</p>
+                <p style="font-size: 14px; text-align: center; margin: 0; margin-bottom: 10px;">Dilaksanakan pada tanggal _________ Juni 2023 di Sampit</p>
               </div>
               <hr>
               <div class="space-y-3">
                 <style type="text/css">
                   .tg  {width:100%;border-collapse:collapse;border-spacing:0;border:solid 1px #000000;}
-                  .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:8px;
+                  .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
                   overflow:hidden;padding:6px 3px;word-break:normal;border:solid 1px #000000;}
-                  .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:8px;
+                  .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
                   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;border:solid 1px #000000;}
-                  .tg .tg-nrix{vertical-align:middle;border:solid 1px #000000; font-size: 8px;}
+                  .tg .tg-nrix{vertical-align:middle;border:solid 1px #000000; font-size: 12px;}
                 </style>
                 <table class="tg">
                   <colgroup>
@@ -173,78 +173,80 @@ const registrationSecondStepEmail = function (dataString: string) {
                     }).join("")}
                     <tr>
                         <td colspan="2">
-                            <div style="width: 100%;">
-                                <div style="width: 65%; float: left; overflow:hidden;">
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <div style="display: flex; flex-direction: column; justify-content: space-between; flex: 0.65;">
                                     <div>
-                                        <p style="font-size: 6px; margin: 0; margin-bottom: 2.5px;">
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
                                             Syarat Keabsahan Data (dokumen yang wajib dilampirkan) :
                                         </p>
-                                        <p style="font-size: 6px; margin: 0; margin-bottom: 2.5px;">
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
                                             1. Fotocopy KTP (Kartu Tanda Penduduk);
                                         </p>
-                                        <p style="font-size: 6px; margin: 0; margin-bottom: 2.5px;">
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
                                             2. Fotocopy KK (Kartu Keluarga);
                                         </p>
-                                        <p style="font-size: 6px; margin: 0; margin-bottom: 2.5px;">
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
                                             3. Fotocopy Akta Kelahiran;
                                         </p>
-                                        <p style="font-size: 6px; margin: 0; margin-bottom: 2.5px;">
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 2.5px;">
                                             4. Fotocopy Ijazah Terakhir bagi yang berusia dibawah 17 tahun;
                                         </p>
-                                        <p style="font-size: 6px; margin: 0; margin-bottom: 5px;">
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 5px;">
                                             5. Pas Foto 3 x 4 sebanyak 3 lembar.
                                         </p>
                                     </div>
                                     <div>
-                                        <p style="font-size: 6px; margin: 0; margin-bottom: 5px;">
+                                        <p style="font-size: 10px; margin: 0; margin-bottom: 5px;">
                                             Form Tahap II kepada Panitia selambat-lambatnya pada tanggal 28 Februari 2023 di Sekretariat KONI Kotawaringin Timur - Sampit.
                                         </p>
-                                        <p style="font-size: 6px; margin: 0;">
+                                        <p style="font-size: 10px; margin: 0;">
                                             Pada Tahap III (Keabsahan Data) wajib membawa persyaratan atlet berupa KTP asli, KK asli, Akta Kelahiran asli / Ijazah Terakhir bagi yang berusia dibawah 17 tahun.
                                         </p>
                                     </div>
                                 </div>
-                                <div style="width: 35%; float: right; overflow:hidden;">
+                                <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-end; flex: 0.35;">
                                     ${data.candidate.photo !== null ? `
-                                        <img src="${photoUrl}" style="width: 30%; object-fit: contain; margin-left: 70%;" />
+                                        <img src="${photoUrl}" style="width: 50%; object-fit: contain;" />
                                     ` : ''}
                                 </div>
                             </div>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <div style="width: 100%;">
-                                <div style="width: 45%; float: right; overflow:hidden;">
-                                    <p style="text-align: center; font-size: 10px; margin: 0;">
+                            <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 100%;">
+                                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.45;">
+                                    <p style="text-align: center; font-size: 14px; margin: 0;">
                                         ${new Date().getDate()} ${month[new Date().getMonth()]} ${new Date().getFullYear()}
                                     </p>
-                                    <p style="text-align: center; font-size: 9px; border-bottom: 1px solid #000; margin: 0; margin-top: 45px;">
+                                    <p style="text-align: center; font-size: 13px; border-bottom: 1px solid #000; margin: 0; margin-top: 45px;">
                                         ${data.candidate.name}
                                     </p>
-                                    <p style="text-align: center; font-size: 9px; margin: 0;">
+                                    <p style="text-align: center; font-size: 13px; margin: 0;">
                                         ${data.candidate.status}
                                     </p>
                                 </div>
                             </div>
-                            <div style="width: 100%; float:left; overflow:hidden; margin-top: 45px;">
-                                <div style="width: 45%; float: left; overflow: hidden;">
-                                    <p style="text-align: center; font-size: 10px; border-top: 1px solid #000; margin: 0;">Ketua / Sekretaris KONI Kabupaten / Kota</p>
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; margin-top: 65px;">
+                                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.45;">
+                                    <p style="text-align: center; font-size: 16px; font-weight: 600; margin: 0;"></p>
+                                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000; margin: 0;">Ketua / Sekretaris KONI Kabupaten / Kota</p>
                                 </div>
-                                <div style="width: 45%; float: right; overflow: hidden;">
-                                    <p style="text-align: center; font-size: 10px; border-top: 1px solid #000; margin: 0;">Ketua / Sekretaris Pengkab / Pengkot</p>
+                                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.45;">
+                                    <p style="text-align: center; font-size: 16px; font-weight: 600; margin: 0;"></p>
+                                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000; margin: 0;">Ketua / Sekretaris Pengkab / Pengkot</p>
                                 </div>
                             </div>
                         </td>
                     </tr>
                   </tbody>
                 </table>
-                <div style="width: 100%; margin-top: 5px;">
-                    <p style="font-size: 7px; margin: 0; margin-bottom: 5px;">*Wajib TTD dan Cap Stampel Ketua / Sekretaris KONI Kabupaten / Kota</p>
-                    <p style="font-size: 7px; margin: 0; margin-bottom: 5px;">*Wajib TTD dan Cap Stampel Ketua / Sekretaris Pengkab / Pengkot</p>
+                <div style="display: flex; flex-direction: column; margin-top: 5px;">
+                    <p style="font-size: 9px; margin: 0; margin-bottom: 5px;">*Wajib TTD dan Cap Stampel Ketua / Sekretaris KONI Kabupaten / Kota</p>
+                    <p style="font-size: 9px; margin: 0; margin-bottom: 5px;">*Wajib TTD dan Cap Stampel Ketua / Sekretaris Pengkab / Pengkot</p>
                 </div>
-                <div style="width: 100%; margin-top: 15px;">
-                    <p style="text-align: center; font-size: 8px; margin: 0; margin-bottom: 10px;">Formulir Pendaftaran Tahap 2 ini diterima oleh</p>
-                    <p style="text-align: center; font-size: 8px; margin: 0; margin-bottom: 10px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah</p>
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
+                    <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Formulir Pendaftaran Tahap 2 ini diterima oleh</p>
+                    <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah</p>
                 </div>
               </div>
             </div>
@@ -262,12 +264,12 @@ export const attachmentSecondStepEmail = (photoUrl: string, ijazahUrl: string) =
     const base64Photo = photoUrl === "" ? "" : "data:image/png;base64," + fs.readFileSync(photo, { encoding: "base64" });
     const base64Ijazah = ijazahUrl === "" ? "" : "data:image/png;base64," + fs.readFileSync(ijazah, { encoding: "base64" })
     return `
-        <div style="width: 100%; margin-top: 15px; float: center;">
+        <div style="display: flex; flex-direction: column; margin-top: 15px;">
             <p style="text-align: center; font-size: 16px; font-weight: 60; margin: 0; margin-bottom: 20px; width: 100%;">Lampiran</p>
-            <p style="text-align: center; font-size: 10px; margin: 0; margin-bottom: 10px; width: 100%;">Foto KTP</p>
-            <img src="${base64Photo}" style="width: 30%; object-fit: contain;" />
-            <p style="text-align: center; font-size: 10px; margin: 0; margin-bottom: 10px; width: 100%;">Foto Ijazah</p>
-            <img src="${base64Ijazah}" style="width: 50%; object-fit: contain;" />
+            <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px; width: 100%;">Foto KTP</p>
+            <img src="${base64Photo}" style="width: 100%; height: 15vh; object-fit: contain;" />
+            <p style="text-align: center; font-size: 12px; margin: 0; margin-bottom: 10px; width: 100%;">Foto Ijazah</p>
+            <img src="${base64Ijazah}" style="width: 100%; height: 40vh; object-fit: contain;" />
         </div>
     `
 }
