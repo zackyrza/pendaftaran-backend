@@ -54,9 +54,9 @@ router.post("/send/firstStep", async (req: Request, res: Response) => {
 router.post("/send/secondStep", async (req: Request, res: Response) => {
     try {
         // for local
-        const browser = await puppeteer.launch({ headless: true });
+        // const browser = await puppeteer.launch({ headless: true });
         // for server
-        // const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'], timeout: 0 });
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'], timeout: 0 });
         const page = await browser.newPage();
         const mergedPDF = await PDFDocument.create();
         const pdfFiles: Buffer[] = [];
