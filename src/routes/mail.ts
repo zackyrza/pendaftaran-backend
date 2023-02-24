@@ -16,12 +16,50 @@ const router = express.Router();
 const mailService = MailService.getInstance();
 mailService.createConnection();
 
+const minimal_args = [
+  '--autoplay-policy=user-gesture-required',
+  '--disable-background-networking',
+  '--disable-background-timer-throttling',
+  '--disable-backgrounding-occluded-windows',
+  '--disable-breakpad',
+  '--disable-client-side-phishing-detection',
+  '--disable-component-update',
+  '--disable-default-apps',
+  '--disable-dev-shm-usage',
+  '--disable-domain-reliability',
+  '--disable-extensions',
+  '--disable-features=AudioServiceOutOfProcess',
+  '--disable-hang-monitor',
+  '--disable-ipc-flooding-protection',
+  '--disable-notifications',
+  '--disable-offer-store-unmasked-wallet-cards',
+  '--disable-popup-blocking',
+  '--disable-print-preview',
+  '--disable-prompt-on-repost',
+  '--disable-renderer-backgrounding',
+  '--disable-setuid-sandbox',
+  '--disable-speech-api',
+  '--disable-sync',
+  '--hide-scrollbars',
+  '--ignore-gpu-blacklist',
+  '--metrics-recording-only',
+  '--mute-audio',
+  '--no-default-browser-check',
+  '--no-first-run',
+  '--no-pings',
+  '--no-sandbox',
+  '--no-zygote',
+  '--password-store=basic',
+  '--use-gl=swiftshader',
+  '--use-mock-keychain',
+];
+
 router.post("/send/firstStep", async (req: Request, res: Response) => {
     try {
         // for local
         // const browser = await puppeteer.launch({ headless: true });
         // for server
-        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'], timeout: 0 });
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: minimal_args, timeout: 0, userDataDir: './tmp_data' });
         const page = await browser.newPage();
         const data: IFirstStepData = await generateDataForFirstStepEmail(
             req.body.caborId, req.body.cityId,
@@ -56,7 +94,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
         // for local
         // const browser = await puppeteer.launch({ headless: true });
         // for server
-        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'], timeout: 0 });
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: minimal_args, timeout: 0, userDataDir: './tmp_data' });
         const page = await browser.newPage();
         const mergedPDF = await PDFDocument.create();
         const pdfFiles: Buffer[] = [];
@@ -111,6 +149,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
             await page.setContent(attachmentPdf);
             pdfFiles.push(await page.pdf({ format: 'Legal' }));
+            console.log(candidate.name, data.candidates.findIndex((item) => item.email === candidate.email), data.candidates.length - 1, '==============================')
             if (data.candidates.findIndex((item) => item.email === candidate.email) === data.candidates.length - 1) {
                 await runPdfFiles();
             }
@@ -126,7 +165,7 @@ router.post("/send/candidatesByCity", async (req: Request, res: Response) => {
         // for local
         // const browser = await puppeteer.launch({ headless: true });
         // for server
-        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox'], timeout: 0 });
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: minimal_args, timeout: 0, userDataDir: './tmp_data' });
         const page = await browser.newPage();
         const mergedPDF = await PDFDocument.create();
         const pdfFiles: Buffer[] = [];
