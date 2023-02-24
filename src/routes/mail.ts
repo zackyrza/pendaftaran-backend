@@ -108,7 +108,9 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             console.log(pdfFiles, 'afterFiles ==============================')
             await browser.close();
             console.log('after browser close', '==============================');
-            const pdfFinal = Buffer.from(await mergedPDF.saveAsBase64(), 'base64');
+            const convertedPdf = await mergedPDF.saveAsBase64();
+            console.log('after convertedPdf', '==============================');
+            const pdfFinal = Buffer.from(convertedPdf, 'base64');
             console.log('after pdfFinal', '==============================');
             const emailHtml = secondStepEmailHTML(data.city, data.sport, data.className);
             console.log('after emailHtml', '==============================');
