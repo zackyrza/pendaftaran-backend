@@ -98,21 +98,21 @@ const registrationFirstStepEmail = function (dataString: string) {
                   </tbody>
                 </table>
                 <hr>
-                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 65px;">
-                  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.35;">
+                <div style="margin-top: 65px; width: 100%;">
+                  <div style="width: 35%; float: left; overflow:hidden;">
                     <p style="text-align: center; font-size: 16px; font-weight: 600;"></p>
-                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap KONI Kabupaten / Kota</p>
+                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000; margin-top: 5px;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap KONI Kabupaten / Kota</p>
                   </div>
-                  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.3;">
+                  <div style="width: 30%; float: left; overflow:hidden;">
                     <p style="text-align: center; font-size: 12px;">${new Date().getDate()}-${month[new Date().getMonth()]}-${new Date().getFullYear()}</p>
                     <p style="text-align: center; font-size: 12px;">Tanggal</p>
                   </div>
-                  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 0.35;">
+                  <div style="width: 35%; float: left; overflow:hidden;">
                     <p style="text-align: center; font-size: 16px; font-weight: 600;"></p>
-                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap Pengkab / Komda</p>
+                    <p style="text-align: center; font-size: 12px; border-top: 1px solid #000; margin-top: 5px;">Tanda Tangan Ketua Umum / Sekretaris Umum dan Cap Pengkab / Komda</p>
                   </div>
                 </div>
-                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px; width: 100%;">
                 	<p style="text-align: center; font-size: 12px;">Formulir Pendaftaran Tahap 1 ini diterima oleh</p>
                   <p style="text-align: center; font-size: 12px;">Panitia Besar PORPROV XII Tahun 2023 Kalimantan Tengah</p>
                   <p style="text-align: center; font-size: 12px;">Pada JUNI 2023</p>
