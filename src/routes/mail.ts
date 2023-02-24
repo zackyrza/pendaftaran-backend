@@ -105,26 +105,24 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
         let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
 
         const afterFiles = async () => {
-            console.log(pdfFiles, 'afterFiles ==============================')
             await browser.close();
-            console.log('after browser close', '==============================');
-            const convertedPdf = await mergedPDF.saveAsBase64();
-            console.log('after convertedPdf', '==============================');
-            const pdfFinal = Buffer.from(convertedPdf, 'base64');
-            console.log('after pdfFinal', '==============================');
-            const emailHtml = secondStepEmailHTML(data.city, data.sport, data.className);
-            console.log('after emailHtml', '==============================');
-            await mailService.sendMail(req.headers.Authorization, {
-                to: req.body.email,
-                subject: `Pendaftaran tahap 2 untuk ${data.sport} dari Kabupaten / Kota ${data.city}`,
-                html: emailHtml,
-                attachments: [
-                    {
-                        filename,
-                        content: pdfFinal,
-                    }
-                ],
+            const convertedPdf = await mergedPDF.save({
+                useObjectStreams: true,
             });
+            console.log('after convert', '==============================')
+            const pdfFinal = PDFDocument.load(convertedPdf).then((pdf) => pdf.save());
+            const emailHtml = secondStepEmailHTML(data.city, data.sport, data.className);
+            // await mailService.sendMail(req.headers.Authorization, {
+            //     to: req.body.email,
+            //     subject: `Pendaftaran tahap 2 untuk ${data.sport} dari Kabupaten / Kota ${data.city}`,
+            //     html: emailHtml,
+            //     attachments: [
+            //         {
+            //             filename,
+            //             content: pdfFinal,
+            //         }
+            //     ],
+            // });
             console.log('after sendMail', '==============================');
             res.status(200).send({ message: "Email sent" });
         }
