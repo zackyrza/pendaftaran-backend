@@ -107,8 +107,11 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
         const afterFiles = async () => {
             console.log(pdfFiles, 'afterFiles ==============================')
             await browser.close();
+            console.log('after browser close', '==============================');
             const pdfFinal = Buffer.from(await mergedPDF.saveAsBase64(), 'base64');
+            console.log('after pdfFinal', '==============================');
             const emailHtml = secondStepEmailHTML(data.city, data.sport, data.className);
+            console.log('after emailHtml', '==============================');
             await mailService.sendMail(req.headers.Authorization, {
                 to: req.body.email,
                 subject: `Pendaftaran tahap 2 untuk ${data.sport} dari Kabupaten / Kota ${data.city}`,
@@ -120,11 +123,11 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
                     }
                 ],
             });
+            console.log('after sendMail', '==============================');
             res.status(200).send({ message: "Email sent" });
         }
 
         const runPdfFiles = async () => {
-            console.log('runPdfFiles', '==============================')
             for await (const pdfItem of pdfFiles) {
                 const pdfDoc = await PDFDocument.load(pdfItem);
                 const [pdfPage] = await mergedPDF.copyPages(pdfDoc, pdfDoc.getPageIndices());
@@ -149,7 +152,6 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
             await page.setContent(attachmentPdf);
             pdfFiles.push(await page.pdf({ format: 'Legal' }));
-            console.log(candidate.name, data.candidates.findIndex((item) => item.name === candidate.name), data.candidates.length - 1, '==============================')
             if (data.candidates.findIndex((item) => item.name === candidate.name) === data.candidates.length - 1) {
                 await runPdfFiles();
             }
