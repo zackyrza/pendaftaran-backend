@@ -169,6 +169,43 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
     }
 });
 
+router.post("/generate/secondStep", async (req: Request, res: Response) => {
+    try {
+        const generatedData: ISecondStepData = await generateDataForSecondStepEmail(
+            req.body.classId, req.body.cityId,
+        );
+        let data: any[] = [];
+        
+        const send = () => {
+            res.status(200).send({
+                message: "Success",
+                data,
+            });
+        }
+
+        generatedData.candidates.forEach((candidate, index) => {
+            data.push({
+                    main: {
+                        sport: generatedData.sport,
+                        city: generatedData.city,
+                        className: generatedData.className,
+                        candidate,
+                    },
+                    attachment: {
+                        ktp: candidate.ktp,
+                        ijazah: candidate.ijazah,
+                    },
+                });
+                if (index === generatedData.candidates.length - 1) {
+                    send();
+                }
+        });
+    } catch (error) {
+        console.log(error, 'error email ==============================');
+        res.status(500).send({ message: "Failed to send email" });
+    }
+});
+
 router.post("/send/candidatesByCity", async (req: Request, res: Response) => {
     try {
         // for local
@@ -224,6 +261,45 @@ router.post("/send/candidatesByCity", async (req: Request, res: Response) => {
             ],
         });
         res.status(200).send({ message: "Email sent" });
+    } catch (error) {
+        console.log(error, 'error email ==============================');
+        res.status(500).send({ message: "Failed to send email" });
+    }
+});
+
+router.post("/generate/candidatesByCity", async (req: Request, res: Response) => {
+    try {
+        const generatedData: ICandidateByCityData = await generateDataForCandidatesByCityEmail(
+            req.body.cityId,
+        );
+        let data: any[] = [];
+        
+        const send = () => {
+            res.status(200).send({
+                message: "Success",
+                data,
+            });
+        }
+
+        generatedData.classes.forEach((classItem, index) => {
+            classItem.candidates.forEach((candidate, indexCandidate) => {
+                data.push({
+                    main: {
+                        sport: classItem.sport,
+                        city: generatedData.city,
+                        className: classItem.className,
+                        candidate,
+                    },
+                    attachment: {
+                        ktp: candidate.ktp,
+                        ijazah: candidate.ijazah,
+                    },
+                });
+                if (classItem.candidates.length - 1 === indexCandidate && index === generatedData.classes.length - 1) {
+                    send();
+                }
+            });
+        });
     } catch (error) {
         console.log(error, 'error email ==============================');
         res.status(500).send({ message: "Failed to send email" });
