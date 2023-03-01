@@ -158,10 +158,10 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
                 }
             ));
             await page.setContent(html);
-            pdfFiles.push(await page.pdf({ format: 'Legal' }));
+            pdfFiles.push(await page.pdf({ format: 'Legal', timeout: 0, }));
             const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
             await page.setContent(attachmentPdf);
-            pdfFiles.push(await page.pdf({ format: 'Legal' }));
+            pdfFiles.push(await page.pdf({ format: 'Legal', timeout: 0, }));
             if (data.candidates.findIndex((item) => item.name === candidate.name) === data.candidates.length - 1) {
                 await runPdfFiles();
             }
