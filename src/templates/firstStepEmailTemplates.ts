@@ -7,21 +7,21 @@ const registrationFirstStepEmail = function (dataString: string) {
   const putraCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
     const putra = item.registrations.filter(t => t.name === 'Laki - Laki');
     if (putra.length > 0) {
-      return putra.reduce((acc2: number, item: any) => acc + acc2 + item.total, 0);
+      return putra.reduce((acc2: number, item: any) => acc2 + item.total, 0);
     }
     return acc;
   }, 0);
   const putriCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
     const putri = item.registrations.filter(t => t.name === 'Perempuan');
     if (putri.length > 0) {
-      return putri.reduce((acc2: number, item: any) => acc + acc2 + item.total, 0);
+      return putri.reduce((acc2: number, item: any) => acc2 + item.total, 0);
     }
     return acc;
   }, 0);
   const campuranCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
     const campuran = item.registrations.filter(t => t.name === 'Campuran');
     if (campuran.length > 0) {
-      return campuran.reduce((acc2: number, item: any) => acc + acc2 + item.total, 0);
+      return campuran.reduce((acc2: number, item: any) => acc2 + item.total, 0);
     }
     return acc;
   }, 0);
