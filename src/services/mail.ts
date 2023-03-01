@@ -72,14 +72,11 @@ export default class MailService {
                 attachments: options.attachments,
             })
             .then((info) => {
-                console.log(`${requestId} - Mail sent successfully!!`);
-                console.log(`${requestId} - [MailResponse]=${info.response} [MessageID]=${info.messageId}`);
-                if (process.env.NODE_ENV === 'local') {
-                    console.log(`${requestId} - Nodemailer ethereal URL: ${nodemailer.getTestMessageUrl(
-                        info
-                    )}`)
-                }
+                console.log(info, ` - Mail sent successfully!!`);
                 return info;
+            }).catch(err => {
+                console.log(err, ` - Mail sent failed!!`);
+                return err;
             });
     }
     //VERIFY CONNECTION
