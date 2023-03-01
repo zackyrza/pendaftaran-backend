@@ -4,29 +4,30 @@ const month = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sept","Okt","Nov
 
 const registrationFirstStepEmail = function (dataString: string) {
   const data: IFirstStepData = JSON.parse(dataString);
-  console.log(data.class, 'class ==============================');
-  const putraCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
-    console.log(item, 'item ==============================');
+  let putraCount = 0;
+  let putriCount = 0;
+  let campuranCount = 0;
+  data.class.forEach((item: IFirstStepClassData) => {
     const putra = item.registrations.filter(t => t.name === 'Laki - Laki');
     if (putra.length > 0) {
-      return putra.reduce((acc2: number, item2: any) => acc + acc2 + item2.total, 0);
+      putra.forEach((item2: any) => putraCount += item2.total);
     }
-    return acc;
-  }, 0);
-  const putriCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
+    return putraCount;
+  });
+  data.class.forEach((item: IFirstStepClassData) => {
     const putri = item.registrations.filter(t => t.name === 'Perempuan');
     if (putri.length > 0) {
-      return putri.reduce((acc2: number, item2: any) => acc + acc2 + item2.total, 0);
+      putri.forEach((item2: any) => putriCount += item2.total);
     }
-    return acc;
-  }, 0);
-  const campuranCount = data.class.reduce((acc: number, item: IFirstStepClassData) => {
+    return putriCount;
+  });
+  data.class.forEach((item: IFirstStepClassData) => {
     const campuran = item.registrations.filter(t => t.name === 'Campuran');
     if (campuran.length > 0) {
-      return campuran.reduce((acc2: number, item2: any) => acc + acc2 + item2.total, 0);
+      campuran.forEach((item2: any) => campuranCount += item2.total);
     }
-    return acc;
-  }, 0);
+    return campuranCount;
+  });
   const countAll = putraCount + putriCount + campuranCount;
   
   const html = `
