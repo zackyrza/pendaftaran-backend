@@ -1,4 +1,4 @@
-const secondStepEmailHTML = (city: string, sport: string, className: string) => `
+const secondStepEmailHTML = (linkUrl: string) => `
     <!doctype html>
     <html>
     <head>
@@ -359,6 +359,9 @@ const secondStepEmailHTML = (city: string, sport: string, className: string) => 
                             <p style="margin: 0;">4. Fotocopy Ijazah Terakhir bagi yang berusia dibawah 17 Tahun;</p>
                             <p style="margin: 0;">5. Pas Foto 3x4 sebanyak 3 lembar;</p>
                             <p style="margin: 0;">6. Dokumen Pendaftaran Tahap 1 dan Tahap 2 DICETAK dan di Verifikasi oleh Ketua/Sekretaris KONI Kabupaten/Kota dan Ketua/Sekretaris Pengkab/Pengkot (Stampel dan TTD Basah);</p>
+                            <div style="width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 15px;">
+                            	<a href="${linkUrl}" style="margin: auto;">Download file PDF</a>
+                            </div>
                         </td>
                         </tr>
                     </table>

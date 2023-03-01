@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import fs from "fs";
 import puppeteer from "puppeteer";
 import path from "path";
 import {PDFDocument} from "pdf-lib";
@@ -103,9 +104,9 @@ router.post("/send/firstStep", async (req: Request, res: Response) => {
 router.post("/send/secondStep", async (req: Request, res: Response) => {
     try {
         // for local
-        // const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({ headless: true });
         // for server
-        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: minimal_args, timeout: 0, userDataDir: './tmp_data' });
+        // const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: minimal_args, timeout: 0, userDataDir: './tmp_data' });
         const page = await browser.newPage();
         await page.setDefaultNavigationTimeout(0);
         const mergedPDF = await PDFDocument.create();
@@ -114,25 +115,25 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
         const data: ISecondStepData = await generateDataForSecondStepEmail(
             req.body.classId, req.body.cityId,
         );
-        let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
+        let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten-kota-" + data.city.toLowerCase().split(" ").join("-");
 
         const afterFiles = async () => {
             await browser.close();
             const convertedPdf = await mergedPDF.save({
                 useObjectStreams: true,
             });
-            const pdfFinal = toBuffer(convertedPdf);
-            const emailHtml = secondStepEmailHTML(data.city, data.sport, data.className);
+            fs.appendFileSync(`${process.cwd()}/pdfs/${filename}-${new Date().toISOString()}.pdf`, convertedPdf);
+            const emailHtml = secondStepEmailHTML(`http://pendaftaran-backend.mitraniagateknologi.com/pdfs/${filename}-${new Date().toISOString()}.pdf`);
             await mailService.sendMail(req.headers.Authorization, {
                 to: req.body.email,
                 subject: `Pendaftaran tahap 2 untuk ${data.sport} dari Kabupaten / Kota ${data.city}`,
                 html: emailHtml,
-                attachments: [
-                    {
-                        filename,
-                        content: pdfFinal,
-                    }
-                ],
+                // attachments: [
+                //     {
+                //         filename,
+                //         content: pdfFinal,
+                //     }
+                // ],
             });
             res.status(200).send({ message: "Email sent" });
         }
