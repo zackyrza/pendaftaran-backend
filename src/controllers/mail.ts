@@ -62,6 +62,7 @@ export const generateDataForFirstStepEmail = (caborId: number, cityId: number): 
                     };
                 }),
             };
+
             resolve(data);
         });
     });
