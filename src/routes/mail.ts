@@ -123,7 +123,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
                 useObjectStreams: true,
             });
             const pdfName = `pdfs/${filename}-${new Date().toISOString()}.pdf`;
-            console.log(pdfName, 'filename ==============================')
+            console.log(pdfName, 'tahap 2 - filename ==============================')
             fs.appendFileSync(`${process.cwd()}/${pdfName}`, convertedPdf);
             const emailHtml = secondStepEmailHTML(`http://pendaftaran-backend.mitraniagateknologi.com/${pdfName}`);
             await mailService.sendMail(req.headers.Authorization, {
@@ -167,7 +167,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
             await page.setContent(attachmentPdf);
             pdfFiles.push(await page.pdf({ format: 'Legal', timeout: 0, }));
-            if (data.candidates.findIndex((item) => item.name === candidate.name) === data.candidates.length - 1) {
+            if (data.candidates.findIndex((item) => item.id === candidate.id) === data.candidates.length - 1) {
                 console.log('done generating pdf', '==============================')
                 await runPdfFiles();
             }
