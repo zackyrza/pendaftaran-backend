@@ -1,4 +1,5 @@
 export interface ICandidateData {
+    id?: number,
     name: string,
     registrationId: number,
     status: string,
