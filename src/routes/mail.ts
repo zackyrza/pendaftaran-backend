@@ -116,7 +116,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             req.body.classId, req.body.cityId,
         );
         let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten-kota-" + data.city.toLowerCase().split(" ").join("-");
-
+        console.log(data.candidates, req.body.email, 'candidate data==============================');
         const afterFiles = async () => {
             await browser.close();
             const convertedPdf = await mergedPDF.save({
