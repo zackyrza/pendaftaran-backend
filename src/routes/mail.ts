@@ -116,7 +116,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             req.body.classId, req.body.cityId,
         );
         let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten-kota-" + data.city.toLowerCase().split(" ").join("-");
-        console.log(data.candidates, req.body.email, 'candidate data==============================');
+        console.log(data.candidates.length, req.body.email, 'tahap 2 - candidate length ==============================');
         const afterFiles = async () => {
             await browser.close();
             const convertedPdf = await mergedPDF.save({
@@ -146,6 +146,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
                 const [pdfPage] = await mergedPDF.copyPages(pdfDoc, pdfDoc.getPageIndices());
                 mergedPDF.addPage(pdfPage);
                 if (pdfFiles.findIndex((item) => item === pdfItem) === pdfFiles.length - 1) {
+                    console.log('done merging pdf', '==============================')
                     await afterFiles();
                 }
             }
@@ -166,6 +167,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             await page.setContent(attachmentPdf);
             pdfFiles.push(await page.pdf({ format: 'Legal', timeout: 0, }));
             if (data.candidates.findIndex((item) => item.name === candidate.name) === data.candidates.length - 1) {
+                console.log('done generating pdf', '==============================')
                 await runPdfFiles();
             }
         }
