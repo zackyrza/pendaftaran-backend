@@ -123,6 +123,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
                 useObjectStreams: true,
             });
             const pdfName = `pdfs/${filename}-${new Date().toISOString()}.pdf`;
+            console.log(pdfName, 'filename ==============================')
             fs.appendFileSync(`${process.cwd()}/${pdfName}`, convertedPdf);
             const emailHtml = secondStepEmailHTML(`http://pendaftaran-backend.mitraniagateknologi.com/${pdfName}`);
             await mailService.sendMail(req.headers.Authorization, {
