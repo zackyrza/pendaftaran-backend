@@ -153,6 +153,7 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
         }
 
         for await (const candidate of data.candidates) {
+            console.log(candidate.id, '==============================')
             const html = registrationSecondStepEmail(JSON.stringify(
                 {
                     sport: data.sport,
