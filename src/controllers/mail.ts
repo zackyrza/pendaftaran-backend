@@ -51,12 +51,12 @@ export const generateDataForFirstStepEmail = (caborId: number, cityId: number): 
                 city: values[1].name,
                 class: values[2].map((item: any) => {
                     const registrations = item.registrations.map((reg: any) => {
-                        console.log(reg, '==============================');
                         return {
                             name: reg.sportGender.name,
                             total: reg.quantity,
                         };
                     });
+                    console.log(registrations, item.name, '==============================')
                     return {
                         name: item.name,
                         registrations,
