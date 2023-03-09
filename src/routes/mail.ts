@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import fs from "fs";
 import puppeteer from "puppeteer";
-import path from "path";
 import {PDFDocument} from "pdf-lib";
 import registrationFirstStepEmail from "../templates/firstStepEmailTemplates";
 import MailService from "../services/mail";
@@ -56,15 +55,6 @@ const minimal_args = [
   '--use-mock-keychain',
 ];
 
-function toBuffer(arrayBuffer: ArrayBuffer) {
-  const buffer = Buffer.alloc(arrayBuffer.byteLength);
-  const view = new Uint8Array(arrayBuffer);
-  for (let i = 0; i < buffer.length; ++i) {
-    buffer[i] = view[i];
-  }
-  return buffer;
-}
-
 router.post("/send/firstStep", async (req: Request, res: Response) => {
     try {
         // for local
@@ -116,14 +106,12 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             req.body.classId, req.body.cityId,
         );
         let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten-kota-" + data.city.toLowerCase().split(" ").join("-");
-        console.log(data.candidates.length, req.body.email, 'tahap 2 - candidate length ==============================');
         const afterFiles = async () => {
             await browser.close();
             const convertedPdf = await mergedPDF.save({
                 useObjectStreams: true,
             });
             const pdfName = `pdfs/${filename}-${new Date().toISOString()}.pdf`;
-            console.log(pdfName, 'tahap 2 - filename ==============================')
             fs.appendFileSync(`${process.cwd()}/${pdfName}`, convertedPdf);
             const emailHtml = secondStepEmailHTML(`http://pendaftaran-backend.mitraniagateknologi.com/${pdfName}`);
             await mailService.sendMail(req.headers.Authorization, {
@@ -146,14 +134,12 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
                 const [pdfPage] = await mergedPDF.copyPages(pdfDoc, pdfDoc.getPageIndices());
                 mergedPDF.addPage(pdfPage);
                 if (pdfFiles.findIndex((item) => item === pdfItem) === pdfFiles.length - 1) {
-                    console.log('done merging pdf', '==============================')
                     await afterFiles();
                 }
             }
         }
 
         for await (const candidate of data.candidates) {
-            console.log(candidate.id, '==============================')
             const html = registrationSecondStepEmail(JSON.stringify(
                 {
                     sport: data.sport,
@@ -168,10 +154,24 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
             await page.setContent(attachmentPdf);
             pdfFiles.push(await page.pdf({ format: 'Legal', timeout: 0, }));
             if (data.candidates.findIndex((item) => item.id === candidate.id) === data.candidates.length - 1) {
-                console.log('done generating pdf', '==============================')
                 await runPdfFiles();
             }
         }
+    } catch (error) {
+        console.log(error, 'error email ==============================');
+        res.status(500).send({ message: "Failed to send email" });
+    }
+});
+
+router.post("/generate/firstStep", async (req: Request, res: Response) => {
+    try {
+        const data: IFirstStepData = await generateDataForFirstStepEmail(
+            req.body.caborId, req.body.cityId,
+        );
+        res.send({
+            data,
+            status: 'success',
+        })
     } catch (error) {
         console.log(error, 'error email ==============================');
         res.status(500).send({ message: "Failed to send email" });
