@@ -53,10 +53,9 @@ export const generateDataForFirstStepEmail = (caborId: number, cityId: number): 
                     const registrations = item.registrations.map((reg: any) => {
                         return {
                             name: reg.sportGender.name,
-                            total: reg.quantity,
+                            total: reg.quantity < 0 ? 0 : reg.quantity,
                         };
                     });
-                    console.log(registrations, item.name, '==============================')
                     return {
                         name: item.name,
                         registrations,
