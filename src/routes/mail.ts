@@ -12,6 +12,7 @@ import secondStepEmailHTML from "../templates/secondStepEmailHTML";
 import registrationSecondStepEmail, { attachmentSecondStepEmail } from "../templates/secondStepEmailTemplates";
 import { ICandidateByCityData } from "../interfaces/CandidateByCityEmail";
 import cityByEmailHTML from "../templates/cityByCandidateEmailHTML";
+import {Readable} from "stream";
 const router = express.Router();
 
 const mailService = MailService.getInstance();
@@ -171,11 +172,17 @@ router.post("/generate/firstStep", async (req: Request, res: Response) => {
         const data: IFirstStepData = await generateDataForFirstStepEmail(
             req.body.caborId, req.body.cityId,
         );
+        let filename = "pendaftaran-tahap-1-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten/kota-" + data.city.toLowerCase().split(" ").join("-") + ".pdf";
         const html = registrationFirstStepEmail(JSON.stringify(data));
         await page.setContent(html);
         const pdf = await page.pdf({ format: 'Legal' });
         await browser.close();
-        res.send(pdf);
+        var file = Readable.from(pdf);
+        var size = Buffer.byteLength(pdf);
+        res.setHeader('Content-Length', size);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename='+filename);
+        file.pipe(res);
     } catch (error) {
         console.log(error, 'error email ==============================');
         res.status(500).send({ message: "Failed to send email" });
