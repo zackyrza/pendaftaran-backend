@@ -208,18 +208,6 @@ router.post("/generate/secondStep", async (req: Request, res: Response) => {
             });
             const pdfName = `pdfs/${filename}-${new Date().toISOString()}.pdf`;
             fs.appendFileSync(`${process.cwd()}/${pdfName}`, convertedPdf);
-            const emailHtml = secondStepEmailHTML(`http://pendaftaran-backend.mitraniagateknologi.com/${pdfName}`);
-            await mailService.sendMail(req.headers.Authorization, {
-                to: req.body.email,
-                subject: `Pendaftaran tahap 2 untuk ${data.sport} dari Kabupaten / Kota ${data.city}`,
-                html: emailHtml,
-                // attachments: [
-                //     {
-                //         filename,
-                //         content: pdfFinal,
-                //     }
-                // ],
-            });
             res.status(200).send({ message: "File generated", data: `http://pendaftaran-backend.mitraniagateknologi.com/${pdfName}` });
         }
 
