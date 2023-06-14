@@ -165,13 +165,17 @@ router.post("/send/secondStep", async (req: Request, res: Response) => {
 
 router.post("/generate/firstStep", async (req: Request, res: Response) => {
     try {
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: minimal_args, timeout: 0, userDataDir: './tmp_data' });
+        const page = await browser.newPage();
+        await page.setDefaultNavigationTimeout(0);
         const data: IFirstStepData = await generateDataForFirstStepEmail(
             req.body.caborId, req.body.cityId,
         );
-        res.send({
-            data,
-            status: 'success',
-        })
+        const html = registrationFirstStepEmail(JSON.stringify(data));
+        await page.setContent(html);
+        const pdf = await page.pdf({ format: 'Legal' });
+        await browser.close();
+        res.send(pdf);
     } catch (error) {
         console.log(error, 'error email ==============================');
         res.status(500).send({ message: "Failed to send email" });
@@ -180,35 +184,67 @@ router.post("/generate/firstStep", async (req: Request, res: Response) => {
 
 router.post("/generate/secondStep", async (req: Request, res: Response) => {
     try {
-        const generatedData: ISecondStepData = await generateDataForSecondStepEmail(
+        const browser = await puppeteer.launch({ headless: true, executablePath: '/snap/bin/chromium', args: minimal_args, timeout: 0, userDataDir: './tmp_data' });
+        const page = await browser.newPage();
+        await page.setDefaultNavigationTimeout(0);
+        const mergedPDF = await PDFDocument.create();
+        const pdfFiles: Buffer[] = [];
+
+        const data: ISecondStepData = await generateDataForSecondStepEmail(
             req.body.classId, req.body.cityId,
         );
-        let data: any[] = [];
-        
-        const send = () => {
-            res.status(200).send({
-                message: "Success",
-                data,
+        let filename = "pendaftaran-tahap-2-cabor-" + data.sport.toLowerCase().split(" ").join("-") + "-kabupaten-kota-" + data.city.toLowerCase().split(" ").join("-");
+        const afterFiles = async () => {
+            await browser.close();
+            const convertedPdf = await mergedPDF.save({
+                useObjectStreams: true,
             });
+            const pdfName = `pdfs/${filename}-${new Date().toISOString()}.pdf`;
+            fs.appendFileSync(`${process.cwd()}/${pdfName}`, convertedPdf);
+            const emailHtml = secondStepEmailHTML(`http://pendaftaran-backend.mitraniagateknologi.com/${pdfName}`);
+            await mailService.sendMail(req.headers.Authorization, {
+                to: req.body.email,
+                subject: `Pendaftaran tahap 2 untuk ${data.sport} dari Kabupaten / Kota ${data.city}`,
+                html: emailHtml,
+                // attachments: [
+                //     {
+                //         filename,
+                //         content: pdfFinal,
+                //     }
+                // ],
+            });
+            res.status(200).send({ message: "File generated", data: `http://pendaftaran-backend.mitraniagateknologi.com/${pdfName}` });
         }
 
-        generatedData.candidates.forEach((candidate, index) => {
-            data.push({
-                    main: {
-                        sport: generatedData.sport,
-                        city: generatedData.city,
-                        className: generatedData.className,
-                        candidate,
-                    },
-                    attachment: {
-                        ktp: candidate.ktp,
-                        ijazah: candidate.ijazah,
-                    },
-                });
-                if (index === generatedData.candidates.length - 1) {
-                    send();
+        const runPdfFiles = async () => {
+            for await (const pdfItem of pdfFiles) {
+                const pdfDoc = await PDFDocument.load(pdfItem);
+                const [pdfPage] = await mergedPDF.copyPages(pdfDoc, pdfDoc.getPageIndices());
+                mergedPDF.addPage(pdfPage);
+                if (pdfFiles.findIndex((item) => item === pdfItem) === pdfFiles.length - 1) {
+                    await afterFiles();
                 }
-        });
+            }
+        }
+
+        for await (const candidate of data.candidates) {
+            const html = registrationSecondStepEmail(JSON.stringify(
+                {
+                    sport: data.sport,
+                    city: data.city,
+                    className: data.className,
+                    candidate,
+                }
+            ));
+            await page.setContent(html);
+            pdfFiles.push(await page.pdf({ format: 'Legal', timeout: 0, }));
+            const attachmentPdf = attachmentSecondStepEmail(candidate.ktp, candidate.ijazah);
+            await page.setContent(attachmentPdf);
+            pdfFiles.push(await page.pdf({ format: 'Legal', timeout: 0, }));
+            if (data.candidates.findIndex((item) => item.id === candidate.id) === data.candidates.length - 1) {
+                await runPdfFiles();
+            }
+        }
     } catch (error) {
         res.status(500).send({ message: "Failed to generate data for second step" });
     }
